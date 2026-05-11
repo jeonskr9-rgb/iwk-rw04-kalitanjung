@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
+            <link rel="stylesheet" href="{{ asset('build/assets/app-MRi5hf-N.css') }}">
+            <script type="module" src="{{ asset('build/assets/app-YtA_lim_.js') }}"></script>
         @else
             <script src="https://cdn.tailwindcss.com"></script>
             <script>
