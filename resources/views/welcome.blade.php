@@ -815,6 +815,16 @@
                         <div>
                             <p class="text-sm font-bold leading-relaxed">Sekretariat RW 04</p>
                             <p class="text-xs opacity-70 mt-1">Kalitanjung Timur, Kec. Harjamukti, Kota Cirebon, Jawa Barat 45143</p>
+                            <div class="mt-4 pt-4 border-t border-white/5 space-y-2">
+                                <p class="text-xs font-bold flex items-center gap-2">
+                                    <i class="fas fa-phone text-indigo-400 text-[10px]"></i>
+                                    +62 812-3456-7890
+                                </p>
+                                <p class="text-xs font-bold flex items-center gap-2">
+                                    <i class="fas fa-envelope text-indigo-400 text-[10px]"></i>
+                                    admin@iwk-rw04.com
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </a>
