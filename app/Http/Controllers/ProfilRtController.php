@@ -11,13 +11,9 @@ class ProfilRtController extends Controller
 {
     public function index()
     {
-        // Emergency Fix: Ensure storage link exists
-        try {
-            if (!file_exists(public_path('storage'))) {
-                Artisan::call('storage:link');
-            }
-        } catch (\Exception $e) {
-            // Silently fail if permissions prevent link creation
+        // Bypass storage:link logic on InfinityFree
+        if (!file_exists(public_path('uploads/profil'))) {
+            mkdir(public_path('uploads/profil'), 0777, true);
         }
 
         $rt_id = auth()->user()->rt_id;
@@ -65,21 +61,21 @@ class ProfilRtController extends Controller
 
         if ($request->hasFile('foto')) {
             // 1. Delete old photo if exists from the correct directory
-            if ($profil->foto && Storage::disk('public')->exists($profil->foto)) {
-                Storage::disk('public')->delete($profil->foto);
+            if ($profil->foto && file_exists(public_path('uploads/profil/' . $profil->foto))) {
+                unlink(public_path('uploads/profil/' . $profil->foto));
             }
             
             // 2. Store the new file with unique name in 'profile_photos'
             $file = $request->file('foto');
             $filename = 'profil_' . ($rt_id ?? 'rw') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('profile_photos', $filename, 'public');
+            $file->move(public_path('uploads/profil'), $filename);
             
             // 3. Save path to database (path is already relative like 'profile_photos/filename.jpg')
-            $profil->foto = $path;
+            $profil->foto = $filename;
             $profil->save();
 
             // 4. Sinkronisasi Foto ke Tabel Users agar Navbar ikut berubah
-            $user->profile_photo_path = $path;
+            $user->profile_photo_path = $filename;
             $user->save();
         }
 
@@ -92,8 +88,8 @@ class ProfilRtController extends Controller
         $profil = ProfilRt::where('rt_id', $rt_id)->first();
 
         if ($profil && $profil->foto) {
-            if (Storage::disk('public')->exists($profil->foto)) {
-                Storage::disk('public')->delete($profil->foto);
+            if (file_exists(public_path('uploads/profil/' . $profil->foto))) {
+                unlink(public_path('uploads/profil/' . $profil->foto));
             }
             $profil->foto = null;
             $profil->save();

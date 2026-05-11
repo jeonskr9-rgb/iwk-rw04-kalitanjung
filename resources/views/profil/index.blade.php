@@ -45,9 +45,9 @@
                         <div class="md:col-span-1 flex flex-col items-center">
                             <div class="w-56 h-56 rounded-[2.5rem] border-8 border-slate-800 overflow-hidden bg-slate-900 shadow-2xl relative group mb-6">
                                 @php
-                                    $exists = $profil->foto && file_exists(storage_path('app/public/' . $profil->foto));
+                                    $exists = $profil->foto && file_exists(public_path('uploads/profil/' . $profil->foto));
                                     $photoUrl = $exists 
-                                        ? url('storage-file/' . $profil->foto) . '?v=' . time() 
+                                        ? asset('uploads/profil/' . $profil->foto) . '?v=' . time() 
                                         : 'https://ui-avatars.com/api/?name=' . urlencode($profil->nama_bendahara ?: auth()->user()->name) . '&background=4f46e5&color=fff&size=512';
                                 @endphp
                                 <img id="photo-preview" src="{{ $photoUrl }}" alt="Foto Bendahara" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">

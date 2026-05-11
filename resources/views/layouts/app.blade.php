@@ -371,7 +371,7 @@
                         <div class="flex-shrink-0">
                             @php
                                 $finalSrc = Auth::user()->profile_photo_path 
-                                    ? asset('storage/' . Auth::user()->profile_photo_path) . '?v=' . time()
+                                    ? asset('uploads/profil/' . Auth::user()->profile_photo_path) . '?v=' . time()
                                     : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=4f46e5&color=fff&bold=true';
                             @endphp
                             <img src="{{ $finalSrc }}" 
