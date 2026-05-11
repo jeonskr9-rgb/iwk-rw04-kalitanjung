@@ -744,11 +744,87 @@
         </div>
     </section>
 
-    <footer class="py-12 px-10 no-print text-center flex flex-col items-center gap-6">
-        <div class="px-4 py-1.5 bg-[#4f46e5] text-white rounded-lg text-[10px] font-black tracking-widest uppercase">IWK</div>
-        <p class="text-slate-400 text-[10px] font-black tracking-[0.3em] uppercase">
-            © 2026 RW 04 Kalitanjung Timur. All Rights Reserved.
-        </p>
+    <style>
+        .dashboard-footer {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(15, 23, 42, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #f8fafc;
+            margin-top: auto;
+        }
+        .light-mode .dashboard-footer {
+            background: rgba(255, 255, 255, 0.85);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            color: #0f172a;
+        }
+        .footer-team-item { transition: all 0.3s ease; }
+        .footer-team-item:hover { transform: translateX(5px); color: #818cf8; }
+        .light-mode .footer-team-item:hover { color: #4f46e5; }
+    </style>
+    <footer class="dashboard-footer mt-12 py-10 px-6 sm:px-10 lg:px-12 transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+            <!-- Tentang Projek -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 bg-[#4f46e5] rounded-xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-dollar-sign text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-white dark:text-white">Sistem IWK</h3>
+                </div>
+                <p class="text-sm opacity-80 leading-relaxed font-medium">
+                    Sistem Informasi Iuran Warga (IWK) merupakan inovasi digitalisasi administrasi keuangan tingkat rukun warga di lingkungan <strong>RW 04 Kalitanjung Timur</strong>. Mengutamakan transparansi, efisiensi, dan akuntabilitas.
+                </p>
+            </div>
+
+            <!-- Tim Pengembang -->
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest mb-6 opacity-60">Tim Pengembang (STMIK IKMI)</h4>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li class="footer-team-item flex items-center gap-3 cursor-default">
+                        <i class="fas fa-terminal w-4 text-center"></i>
+                        <div>Sekar Tanjung Maulidia <span class="block text-[10px] opacity-60 font-normal">Manager Project + Backend</span></div>
+                    </li>
+                    <li class="footer-team-item flex items-center gap-3 cursor-default">
+                        <i class="fas fa-palette w-4 text-center"></i>
+                        <div>Nurkholissah Anindia M. <span class="block text-[10px] opacity-60 font-normal">UI/UX Designer + Tester</span></div>
+                    </li>
+                    <li class="footer-team-item flex items-center gap-3 cursor-default">
+                        <i class="fas fa-desktop w-4 text-center"></i>
+                        <div>Rachmawati Sya'adah <span class="block text-[10px] opacity-60 font-normal">Assistance Manager + Frontend</span></div>
+                    </li>
+                    <li class="footer-team-item flex items-center gap-3 cursor-default">
+                        <i class="fas fa-microchip w-4 text-center"></i>
+                        <div>Suci Febriyanti <span class="block text-[10px] opacity-60 font-normal">Analis + Database Designer</span></div>
+                    </li>
+                    <li class="footer-team-item flex items-center gap-3 cursor-default">
+                        <i class="fas fa-book-open w-4 text-center"></i>
+                        <div>Chamailia <span class="block text-[10px] opacity-60 font-normal">Dokumentasi + Jurnal + LO</span></div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Lokasi & Kontak -->
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest mb-6 opacity-60">Lokasi Pusat</h4>
+                <a href="https://www.google.com/maps/search/?api=1&query=RT.02+RW.04+Kalitanjung+Timur+Kota+Cirebon+45143" target="_blank" class="block group">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 group-hover:bg-indigo-500/10 group-hover:border-indigo-500/20 transition-all duration-300">
+                        <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
+                            <i class="fas fa-map-marker-alt text-indigo-400 group-hover:animate-bounce"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold leading-relaxed">Sekretariat RW 04</p>
+                            <p class="text-xs opacity-70 mt-1">Kalitanjung Timur, Kec. Harjamukti, Kota Cirebon, Jawa Barat 45143</p>
+                        </div>
+                    </div>
+                </a>
+                
+                <div class="mt-8 pt-8 border-t border-white/10 flex justify-between items-center text-xs font-bold opacity-50">
+                    <span>&copy; {{ date('Y') }} Hak Cipta Dilindungi.</span>
+                    <span>v1.0.0</span>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <!-- FORMAL PRINT ONLY GUIDE (Hidden on screen) -->
