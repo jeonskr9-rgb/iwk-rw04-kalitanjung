@@ -9,24 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        <link rel="stylesheet" href="{{ asset('build/assets/app-MRi5hf-N.css') }}">
-        <script type="module" src="{{ asset('build/assets/app-YtA_lim_.js') }}"></script>
-    @else
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Outfit', 'sans-serif'],
-                        }
-                    }
-                }
-            }
-        </script>
-    @endif
+    <link rel="stylesheet" href="{{ asset('build/assets/app-MRi5hf-N.css') }}">
+    <script type="module" src="{{ asset('build/assets/app-YtA_lim_.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
