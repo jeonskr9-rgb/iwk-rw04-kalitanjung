@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
@@ -69,6 +69,19 @@
             .dark-mode .bg-input-guest:focus, .dark .bg-input-guest:focus {
                 border-color: #818cf8 !important;
                 box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.1) !important;
+            }
+
+            /* --- MOBILE OPTIMIZATION --- */
+            @media (max-width: 640px) {
+                h1 { font-size: 2.5rem !important; }
+                .card-guest { 
+                    padding-left: 1.5rem !important; 
+                    padding-right: 1.5rem !important; 
+                    border-radius: 2rem !important;
+                    margin: 1rem !important;
+                    width: calc(100% - 2rem) !important;
+                }
+                .fixed.top-6.right-8 { top: 1rem !important; right: 1rem !important; }
             }
 
             /* Custom Scrollbar */
