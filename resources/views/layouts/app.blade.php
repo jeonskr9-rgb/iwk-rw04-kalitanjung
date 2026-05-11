@@ -11,6 +11,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
@@ -274,34 +277,34 @@
             html.dark .bg-indigo-600 * { 
                 color: #ffffff !important; /* Putih Bersih */
             }
-            /* --- MOBILE OPTIMIZATION (INTERNAL DASHBOARD) --- */
-            @media (max-width: 1024px) {
-                .flex-1.lg\:ml-72 { margin-left: 0 !important; }
+            /* --- FINAL MOBILE STABILIZATION --- */
+            @media (max-width: 768px) {
+                html, body {
+                    overflow-x: hidden !important;
+                    position: relative !important;
+                }
                 
-                /* Table Responsive */
+                .grid, .row, [class*="grid-cols-"], [class*="col-"] {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    width: 100% !important;
+                    gap: 1rem !important;
+                }
+
                 .table-container { 
-                    overflow-x: auto !important; 
-                    -webkit-overflow-scrolling: touch;
-                    margin-bottom: 1rem;
+                    overflow-x: auto !important;
+                    background: var(--bg-card);
+                    padding: 0.5rem;
                     border-radius: 1rem;
                 }
-                table { min-width: 600px; } /* Ensure table doesn't squash too much */
 
-                /* Grid/Cards Stacking */
-                .grid-cols-2, .grid-cols-3, .grid-cols-4 { 
-                    grid-template-columns: repeat(1, minmax(0, 1fr)) !important; 
-                }
-                
-                /* Padding adjustments */
-                main { padding: 1rem !important; }
-                .p-8, .p-10 { padding: 1.5rem !important; }
+                h1 { font-size: 1.75rem !important; }
+                h2 { font-size: 1.5rem !important; }
             }
 
-            /* Custom Hamburger Animation */
-            .hamburger-line { transition: all 0.3s ease; }
-            .open .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .open .hamburger-line:nth-child(2) { opacity: 0; }
-            .open .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+            #sidebar.toggled {
+                transform: translateX(0) !important;
+            }
         </style>
     </head>
     <body class="font-sans antialiased selection:bg-indigo-500/30" x-data="{ sidebarOpen: false }">
@@ -332,11 +335,11 @@
                         </div>
                         <span class="font-black text-sm tracking-tight">IWK RW 04</span>
                     </div>
-                    <button @click="sidebarOpen = !sidebarOpen" class="p-2 text-white bg-white/5 rounded-xl border border-white/10" :class="sidebarOpen ? 'open' : ''">
+                    <button id="sidebarToggle" class="p-2 text-white bg-white/5 rounded-xl border border-white/10">
                         <div class="w-6 h-5 flex flex-col justify-between">
-                            <span class="hamburger-line w-full h-0.5 bg-current rounded-full"></span>
-                            <span class="hamburger-line w-full h-0.5 bg-current rounded-full"></span>
-                            <span class="hamburger-line w-full h-0.5 bg-current rounded-full"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full"></span>
                         </div>
                     </button>
                 </div>
@@ -528,6 +531,20 @@
                     localStorage.setItem('theme', 'light');
                     updateIcons('light');
                 }
+            });
+
+            // Sidebar Toggle Logic (jQuery)
+            $(document).ready(function() {
+                $('#sidebarToggle').click(function() {
+                    $('#sidebar').toggleClass('toggled');
+                });
+                
+                // Close sidebar when clicking outside on mobile
+                $(document).click(function(event) {
+                    if (!$(event.target).closest('#sidebar, #sidebarToggle').length) {
+                        $('#sidebar').removeClass('toggled');
+                    }
+                });
             });
 
             function togglePassword(btn) {

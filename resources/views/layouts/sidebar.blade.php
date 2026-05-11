@@ -1,4 +1,4 @@
-<aside 
+<aside id="sidebar"
     class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[100] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform"
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
     @click.away="sidebarOpen = false">
