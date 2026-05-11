@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'IWK RW 04') }}</title>
@@ -274,9 +274,37 @@
             html.dark .bg-indigo-600 * { 
                 color: #ffffff !important; /* Putih Bersih */
             }
+            /* --- MOBILE OPTIMIZATION (INTERNAL DASHBOARD) --- */
+            @media (max-width: 1024px) {
+                .flex-1.lg\:ml-72 { margin-left: 0 !important; }
+                
+                /* Table Responsive */
+                .table-container { 
+                    overflow-x: auto !important; 
+                    -webkit-overflow-scrolling: touch;
+                    margin-bottom: 1rem;
+                    border-radius: 1rem;
+                }
+                table { min-width: 600px; } /* Ensure table doesn't squash too much */
+
+                /* Grid/Cards Stacking */
+                .grid-cols-2, .grid-cols-3, .grid-cols-4 { 
+                    grid-template-columns: repeat(1, minmax(0, 1fr)) !important; 
+                }
+                
+                /* Padding adjustments */
+                main { padding: 1rem !important; }
+                .p-8, .p-10 { padding: 1.5rem !important; }
+            }
+
+            /* Custom Hamburger Animation */
+            .hamburger-line { transition: all 0.3s ease; }
+            .open .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .open .hamburger-line:nth-child(2) { opacity: 0; }
+            .open .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
         </style>
     </head>
-    <body class="font-sans antialiased selection:bg-indigo-500/30">
+    <body class="font-sans antialiased selection:bg-indigo-500/30" x-data="{ sidebarOpen: false }">
         <script>
             (function() {
                 const theme = localStorage.getItem('theme') || 'dark';
@@ -289,12 +317,30 @@
                 }
             })();
         </script>
-        <div class="min-h-screen flex">
+        <div class="min-h-screen flex flex-col lg:flex-row">
             @auth
                 @include('layouts.sidebar', ['user' => Auth::user()])
             @endauth
 
             <div class="flex-1 {{ Auth::check() ? 'lg:ml-72' : '' }} transition-all duration-300">
+                <!-- MOBILE HEADER (Only visible on mobile) -->
+                @auth
+                <div class="lg:hidden flex items-center justify-between p-4 bg-slate-950 border-b border-white/5 sticky top-0 z-[70] no-print">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-dollar-sign text-white text-sm"></i>
+                        </div>
+                        <span class="font-black text-sm tracking-tight">IWK RW 04</span>
+                    </div>
+                    <button @click="sidebarOpen = !sidebarOpen" class="p-2 text-white bg-white/5 rounded-xl border border-white/10" :class="sidebarOpen ? 'open' : ''">
+                        <div class="w-6 h-5 flex flex-col justify-between">
+                            <span class="hamburger-line w-full h-0.5 bg-current rounded-full"></span>
+                            <span class="hamburger-line w-full h-0.5 bg-current rounded-full"></span>
+                            <span class="hamburger-line w-full h-0.5 bg-current rounded-full"></span>
+                        </div>
+                    </button>
+                </div>
+                @endauth
                 <div class="fixed top-6 right-8 z-[60] flex items-center space-x-4 no-print">
                     @auth
                     <div class="flex items-center space-x-3">

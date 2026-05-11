@@ -1,4 +1,7 @@
-<aside class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-50 hidden lg:flex flex-col overflow-y-auto border-r border-white/5">
+<aside 
+    class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[100] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform"
+    :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
+    @click.away="sidebarOpen = false">
     <!-- Branding -->
     <div class="p-8">
         <div class="flex items-center space-x-3">
