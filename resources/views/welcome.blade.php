@@ -356,8 +356,8 @@
                     @php $dashboardRoute = Auth::user()->role === 'RW' ? 'dashboard.rw' : 'dashboard.rt'; @endphp
                     <a href="{{ route($dashboardRoute) }}" class="text-xs md:text-sm font-black text-slate-600 hover:text-[#4f46e5] transition">Dash<span class="hidden md:inline">board</span></a>
                 @else
-                    <a href="{{ route('login') }}" class="hidden md:block text-sm font-black text-slate-600 hover:text-[#4f46e5] transition">Log In</a>
-                    <a href="{{ route('register') }}" class="px-3 py-2 md:px-6 md:py-2.5 bg-[#4f46e5] text-white rounded-xl font-black text-xs md:text-sm shadow-lg shadow-indigo-100 transition hover:scale-105 whitespace-nowrap">Daftar</a>
+                    <a href="{{ route('login') }}" class="hidden md:block text-sm font-black text-slate-600 hover:text-[#4f46e5] transition dark:text-slate-300">Log In</a>
+                    <a href="{{ route('register') }}" class="px-4 py-2 md:px-6 md:py-2.5 bg-[#4f46e5] text-white rounded-xl font-black text-xs md:text-sm shadow-lg shadow-indigo-200 dark:shadow-none transition hover:scale-105 whitespace-nowrap">Daftar</a>
                 @endauth
             </div>
         </div>
@@ -382,14 +382,14 @@
             <div class="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center px-4 md:px-0">
                 @auth
                     @php $dashboardRoute = Auth::user()->role === 'RW' ? 'dashboard.rw' : 'dashboard.rt'; @endphp
-                    <a href="{{ route($dashboardRoute) }}" class="px-6 md:px-10 py-3 md:py-4 bg-[#4f46e5] text-white rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl shadow-indigo-100 w-full md:w-auto">
+                    <a href="{{ route($dashboardRoute) }}" class="px-6 md:px-10 py-3 md:py-4 bg-[#4f46e5] text-white rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl shadow-indigo-200 dark:shadow-none w-full md:w-auto">
                         Masuk ke Dashboard
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="px-6 md:px-10 py-3 md:py-4 bg-[#4f46e5] text-white rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl shadow-indigo-100 w-full md:w-auto">
+                    <a href="{{ route('login') }}" class="px-6 md:px-10 py-3 md:py-4 bg-[#4f46e5] text-white rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl shadow-indigo-200 dark:shadow-none w-full md:w-auto">
                         Masuk ke Sistem
                     </a>
-                    <a href="{{ route('register') }}" class="px-6 md:px-10 py-3 md:py-4 bg-white text-[#000000] border border-slate-200 rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-sm hover:bg-slate-50 transition w-full md:w-auto">
+                    <a href="{{ route('register') }}" class="px-6 md:px-10 py-3 md:py-4 bg-white dark:bg-slate-800 text-[#000000] dark:text-white border border-slate-200 dark:border-slate-700 rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition w-full md:w-auto">
                         Daftar Pengurus
                     </a>
                 @endauth
@@ -399,9 +399,9 @@
 
     <section class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-black text-slate-900 mb-4">Fitur Utama Platform</h2>
-                <p class="text-[#4f46e5] max-w-xl mx-auto text-lg font-bold">Dilengkapi dengan teknologi otomasi terdepan untuk memudahkan tugas Bendahara.</p>
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4 px-2">Fitur Utama Platform</h2>
+                <p class="text-[#4f46e5] max-w-xl mx-auto text-base md:text-lg font-bold px-4">Dilengkapi dengan teknologi otomasi terdepan untuk memudahkan tugas Bendahara.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-10 rounded-[2.5rem] border border-slate-50 shadow-sm transition hover:shadow-md">
@@ -433,9 +433,9 @@
 
     <section class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="bg-white p-16 rounded-[3rem] text-center border border-slate-50 shadow-sm">
-                <h2 class="text-5xl font-black mb-8 text-[#000000]">Mengapa Digitalisasi IWK?</h2>
-                <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-bold">
+            <div class="bg-white p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] text-center border border-slate-50 shadow-sm">
+                <h2 class="text-3xl md:text-5xl font-black mb-6 md:mb-8 text-[#000000]">Mengapa Digitalisasi IWK?</h2>
+                <p class="text-base md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-bold">
                     Sistem Iuran Warga (IWK) RW 04 Kalitanjung Timur dikembangkan untuk menggantikan pencatatan manual yang rentan kesalahan. 
                     Dengan digitalisasi, transparansi keuangan antara pengurus RT dan warga dapat terjaga, terutama dalam membedakan iuran warga Pribumi dan Andon secara akurat.
                 </p>
@@ -445,7 +445,7 @@
 
     <section id="faq" class="py-24 px-6 no-print">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-black text-center mb-12 text-[#000000]">Pertanyaan Sering Diajukan (FAQ)</h2>
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-10 md:mb-12 text-[#000000]">Pertanyaan Sering Diajukan (FAQ)</h2>
             <div class="space-y-4">
                 <details class="group bg-white p-8 rounded-2xl border border-slate-50 shadow-sm cursor-pointer overflow-hidden transition-all duration-300">
                     <summary class="flex justify-between items-center font-black text-lg list-none">
@@ -477,11 +477,11 @@
     <section id="panduan" class="py-24 px-6 no-print">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-indigo-50 text-[#4f46e5] font-black text-xs uppercase tracking-widest mb-6">
+                <div class="inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-full bg-indigo-50 text-[#4f46e5] font-black text-[10px] md:text-xs uppercase tracking-widest mb-6">
                     <i class="fas fa-book-open"></i> Pusat Bantuan
                 </div>
-                <h2 class="text-5xl font-black mb-6 text-[#000000]">Buku Panduan Pengguna</h2>
-                <p class="text-xl text-[#4f46e5] font-bold max-w-2xl mx-auto mb-10">Panduan lengkap untuk mempermudah tugas pengurus RW 04 Kalitanjung Timur.</p>
+                <h2 class="text-3xl md:text-5xl font-black mb-4 md:mb-6 text-[#000000]">Buku Panduan Pengguna</h2>
+                <p class="text-base md:text-xl text-[#4f46e5] font-bold max-w-2xl mx-auto mb-10">Panduan lengkap untuk mempermudah tugas pengurus RW 04 Kalitanjung Timur.</p>
             </div>
 
             <div class="space-y-12">
