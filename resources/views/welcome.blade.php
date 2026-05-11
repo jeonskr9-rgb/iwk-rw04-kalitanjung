@@ -107,35 +107,47 @@
 
         .guide-card {
             background: #ffffff !important;
-            border-radius: 4rem;
+            border-radius: 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
-            padding: 5rem;
+            padding: 2rem;
             border: 1px solid #f8fafc;
+        }
+        @media (min-width: 768px) {
+            .guide-card { border-radius: 4rem; padding: 5rem; }
         }
         .guide-sub-card {
             background: #ffffff;
             border: 1px solid #f1f5f9;
-            border-radius: 2.5rem;
-            padding: 2.5rem;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
             transition: all 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .guide-sub-card { border-radius: 2.5rem; padding: 2.5rem; }
         }
         .guide-icon-box {
             background-color: #f1f5ff;
             color: #4f46e5;
-            border-radius: 1.5rem;
-            width: 4.5rem;
-            height: 4.5rem;
+            border-radius: 1rem;
+            width: 3.5rem;
+            height: 3.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
+        @media (min-width: 768px) {
+            .guide-icon-box { border-radius: 1.5rem; width: 4.5rem; height: 4.5rem; }
+        }
         .whatsapp-banner {
             background: #059669 !important;
-            border-radius: 3rem;
-            padding: 3.5rem;
+            border-radius: 2rem;
+            padding: 1.5rem;
             color: white;
             box-shadow: 0 20px 40px rgba(5, 150, 105, 0.15);
+        }
+        @media (min-width: 768px) {
+            .whatsapp-banner { border-radius: 3rem; padding: 3.5rem; }
         }
         .guide-sub-header { color: #4f46e5 !important; font-weight: 800 !important; }
         .team-card {
@@ -167,18 +179,21 @@
         
         .floating-pill-nav {
             position: fixed;
-            top: 1.5rem;
+            top: 1rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
+            width: 95%;
             max-width: 1200px;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            border-radius: 2.5rem;
-            padding: 0.85rem 2.5rem;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
             z-index: 1000;
             box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        @media (min-width: 768px) {
+            .floating-pill-nav { top: 1.5rem; width: 90%; border-radius: 2.5rem; padding: 0.85rem 2.5rem; }
         }
         
         details summary::-webkit-details-marker {
@@ -312,58 +327,58 @@
 
     <nav class="floating-pill-nav no-print">
         <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-[#4f46e5] rounded-full flex items-center justify-center shadow-lg">
-                    <i class="fas fa-dollar-sign text-white"></i>
+            <div class="flex items-center gap-2 md:gap-3">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-[#4f46e5] rounded-full flex items-center justify-center shadow-lg shrink-0">
+                    <i class="fas fa-dollar-sign text-white text-sm md:text-base"></i>
                 </div>
-                <span class="text-xl font-black tracking-tighter text-slate-900">IWK RW 04</span>
+                <span class="text-base md:text-xl font-black tracking-tighter text-slate-900 truncate max-w-[100px] md:max-w-none">IWK RW 04</span>
             </div>
             
-            <div class="flex items-center gap-6">
-                <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition shadow-sm">
-                    <i id="theme-toggle-dark-icon" class="fas fa-moon" style="display: block;"></i>
-                    <i id="theme-toggle-light-icon" class="fas fa-sun" style="display: none;"></i>
+            <div class="flex items-center gap-2 md:gap-6">
+                <button id="theme-toggle" class="p-2 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition shadow-sm">
+                    <i id="theme-toggle-dark-icon" class="fas fa-moon text-sm md:text-base" style="display: block;"></i>
+                    <i id="theme-toggle-light-icon" class="fas fa-sun text-sm md:text-base" style="display: none;"></i>
                 </button>
                 
                 @auth
                     @php $dashboardRoute = Auth::user()->role === 'RW' ? 'dashboard.rw' : 'dashboard.rt'; @endphp
-                    <a href="{{ route($dashboardRoute) }}" class="text-sm font-black text-slate-600 hover:text-[#4f46e5] transition">Dashboard</a>
+                    <a href="{{ route($dashboardRoute) }}" class="text-xs md:text-sm font-black text-slate-600 hover:text-[#4f46e5] transition">Dash<span class="hidden md:inline">board</span></a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-black text-slate-600 hover:text-[#4f46e5] transition">Log In</a>
-                    <a href="{{ route('register') }}" class="px-6 py-2.5 bg-[#4f46e5] text-white rounded-xl font-black text-sm shadow-lg shadow-indigo-100 transition hover:scale-105">Daftar Akun</a>
+                    <a href="{{ route('login') }}" class="hidden md:block text-sm font-black text-slate-600 hover:text-[#4f46e5] transition">Log In</a>
+                    <a href="{{ route('register') }}" class="px-3 py-2 md:px-6 md:py-2.5 bg-[#4f46e5] text-white rounded-xl font-black text-xs md:text-sm shadow-lg shadow-indigo-100 transition hover:scale-105 whitespace-nowrap">Daftar</a>
                 @endauth
             </div>
         </div>
     </nav>
 
-    <header class="hero-gradient min-h-screen flex items-center justify-center pt-24 px-6 relative">
+    <header class="hero-gradient min-h-screen flex items-center justify-center pt-24 px-4 md:px-6 relative">
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px]"></div>
         <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px]"></div>
 
-        <div class="max-w-5xl w-full text-center relative z-10">
-            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-white border border-slate-100 text-[#4f46e5] text-sm font-bold shadow-sm">
+        <div class="max-w-5xl w-full text-center relative z-10 mt-10 md:mt-0">
+            <div class="inline-block px-3 py-1.5 mb-4 md:mb-6 rounded-full bg-white border border-slate-100 text-[#4f46e5] text-xs md:text-sm font-bold shadow-sm whitespace-nowrap">
                 🚀 Digitalisasi Keuangan Desa 4.0
             </div>
-            <h1 class="text-5xl md:text-7xl font-black text-[#000000] mb-8 tracking-tight leading-tight">
-                Transparansi Kas Iuran Warga <br>
+            <h1 class="text-3xl sm:text-4xl md:text-7xl font-black text-[#000000] mb-6 md:mb-8 tracking-tight leading-tight">
+                Transparansi Kas Iuran Warga <br class="hidden md:block">
                 RW 04 Kalitanjung Timur
             </h1>
-            <p class="text-xl text-[#4f46e5] mb-12 max-w-2xl mx-auto leading-relaxed font-bold sub-judul-utama">
-                Membangun kepercayaan warga melalui digitalisasi laporan keuangan yang akurat, otomatis, dan dapat diakses kapan saja dari mana saja.
+            <p class="text-base sm:text-lg md:text-xl text-[#4f46e5] mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed font-bold sub-judul-utama px-2">
+                Membangun kepercayaan warga melalui digitalisasi laporan keuangan yang akurat, otomatis, dan dapat diakses kapan saja.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+            <div class="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center px-4 md:px-0">
                 @auth
                     @php $dashboardRoute = Auth::user()->role === 'RW' ? 'dashboard.rw' : 'dashboard.rt'; @endphp
-                    <a href="{{ route($dashboardRoute) }}" class="px-10 py-4 bg-[#4f46e5] text-white rounded-2xl font-black text-lg shadow-xl shadow-indigo-100">
-                        Masuk ke Dashboard Sistem
+                    <a href="{{ route($dashboardRoute) }}" class="px-6 md:px-10 py-3 md:py-4 bg-[#4f46e5] text-white rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl shadow-indigo-100 w-full md:w-auto">
+                        Masuk ke Dashboard
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="px-10 py-4 bg-[#4f46e5] text-white rounded-2xl font-black text-lg shadow-xl shadow-indigo-100">
+                    <a href="{{ route('login') }}" class="px-6 md:px-10 py-3 md:py-4 bg-[#4f46e5] text-white rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-xl shadow-indigo-100 w-full md:w-auto">
                         Masuk ke Sistem
                     </a>
-                    <a href="{{ route('register') }}" class="px-10 py-4 bg-white text-[#000000] border border-slate-200 rounded-2xl font-black text-lg shadow-sm hover:bg-slate-50 transition">
-                        Daftar Akun Pengurus
+                    <a href="{{ route('register') }}" class="px-6 md:px-10 py-3 md:py-4 bg-white text-[#000000] border border-slate-200 rounded-xl md:rounded-2xl font-black text-base md:text-lg shadow-sm hover:bg-slate-50 transition w-full md:w-auto">
+                        Daftar Pengurus
                     </a>
                 @endauth
             </div>
@@ -621,24 +636,24 @@
         </div>
     </section>
 
-    <section class="py-24 px-6">
+    <section class="py-12 md:py-24 px-4 md:px-6">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-white p-12 rounded-[4rem] border border-slate-50 shadow-sm text-center">
-                <h2 class="text-3xl font-black text-[#000000] mb-12 tracking-tight">Cakupan Wilayah RW 04</h2>
-                <div class="flex flex-wrap justify-center gap-16">
+            <div class="bg-white p-6 md:p-12 rounded-[2rem] md:rounded-[4rem] border border-slate-50 shadow-sm text-center">
+                <h2 class="text-2xl md:text-3xl font-black text-[#000000] mb-8 md:mb-12 tracking-tight">Cakupan Wilayah RW 04</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
                     <div class="text-center group">
-                        <div class="text-4xl font-black text-[#4f46e5] mb-2">RT 01</div>
-                        <span class="text-slate-400 text-xs uppercase tracking-widest font-black">Sektor Timur</span>
+                        <div class="text-3xl md:text-4xl font-black text-[#4f46e5] mb-1 md:mb-2">RT 01</div>
+                        <span class="text-slate-400 text-[10px] md:text-xs uppercase tracking-widest font-black">Sektor Timur</span>
                     </div>
-                    <div class="w-px h-16 bg-slate-100 hidden md:block"></div>
+                    <div class="w-16 h-px md:w-px md:h-16 bg-slate-100 block"></div>
                     <div class="text-center group">
-                        <div class="text-4xl font-black text-[#4f46e5] mb-2">RT 02</div>
-                        <span class="text-slate-400 text-xs uppercase tracking-widest font-black">Sektor Tengah</span>
+                        <div class="text-3xl md:text-4xl font-black text-[#4f46e5] mb-1 md:mb-2">RT 02</div>
+                        <span class="text-slate-400 text-[10px] md:text-xs uppercase tracking-widest font-black">Sektor Tengah</span>
                     </div>
-                    <div class="w-px h-16 bg-slate-100 hidden md:block"></div>
+                    <div class="w-16 h-px md:w-px md:h-16 bg-slate-100 block"></div>
                     <div class="text-center group">
-                        <div class="text-4xl font-black text-[#4f46e5] mb-2">RT 03</div>
-                        <span class="text-slate-400 text-xs uppercase tracking-widest font-black">Sektor Barat</span>
+                        <div class="text-3xl md:text-4xl font-black text-[#4f46e5] mb-1 md:mb-2">RT 03</div>
+                        <span class="text-slate-400 text-[10px] md:text-xs uppercase tracking-widest font-black">Sektor Barat</span>
                     </div>
                 </div>
             </div>
