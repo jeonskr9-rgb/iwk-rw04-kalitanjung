@@ -237,6 +237,26 @@
                 background: white !important;
             }
         }
+
+        /* OPTIMASI MOBILE (Media Queries) */
+        @media (max-width: 768px) {
+            /* 1. Padding & Margin diperkecil */
+            section { padding-top: 3rem !important; padding-bottom: 3rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+            
+            /* 2. Ukuran Teks (H1 & H2) lebih proporsional */
+            h1 { font-size: 2.25rem !important; line-height: 1.2 !important; }
+            h2 { font-size: 1.75rem !important; }
+            
+            /* 3. Fallback Glassmorphism (Solid Color agar tidak lag di HP jadul) */
+            .floating-pill-nav, .dashboard-footer, .glass {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background: rgba(15, 23, 42, 0.95) !important;
+            }
+            .light-mode .floating-pill-nav, .light-mode .dashboard-footer {
+                background: rgba(255, 255, 255, 0.98) !important;
+            }
+        }
         /* --- STYLES KHUSUS MODE GELAP (FINAL PREMIUM SCOPED) --- */
         .dark-mode, .dark {
             background-color: #020617 !important;
