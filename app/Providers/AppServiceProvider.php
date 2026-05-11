@@ -21,14 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (config('app.env') === 'production') {
-            $viewPath = '/tmp/storage/framework/views';
-            if (!is_dir($viewPath)) {
-                mkdir($viewPath, 0777, true);
-            }
-            config(['view.compiled' => $viewPath]);
-        }
-
         // Global Database Connection Check
         try {
             DB::connection()->getPdo();
