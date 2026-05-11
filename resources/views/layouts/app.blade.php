@@ -277,33 +277,44 @@
             html.dark .bg-indigo-600 * { 
                 color: #ffffff !important; /* Putih Bersih */
             }
-            /* --- FINAL MOBILE STABILIZATION --- */
+            /* --- FLUID SCALING & MOBILE STABILIZATION --- */
             @media (max-width: 768px) {
                 html, body {
                     overflow-x: hidden !important;
                     position: relative !important;
                 }
                 
+                /* 2-Column Grid on Mobile for efficiency */
                 .grid, .row, [class*="grid-cols-"], [class*="col-"] {
-                    display: flex !important;
-                    flex-direction: column !important;
+                    display: grid !important;
+                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                    gap: 0.75rem !important;
                     width: 100% !important;
-                    gap: 1rem !important;
                 }
 
+                /* Table Container remains scrollable */
                 .table-container { 
                     overflow-x: auto !important;
                     background: var(--bg-card);
                     padding: 0.5rem;
                     border-radius: 1rem;
+                    grid-column: span 2 !important; /* Force tables to take full width */
                 }
 
-                h1 { font-size: 1.75rem !important; }
-                h2 { font-size: 1.5rem !important; }
+                /* Header Spacer to prevent overlap */
+                main { padding-top: 5rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+                
+                /* Typography Scaling */
+                h1 { font-size: 1.5rem !important; }
+                h2 { font-size: 1.25rem !important; }
+                
+                /* Touch Target size */
+                button, a.rounded-2xl { min-height: 44px !important; }
             }
 
             #sidebar.toggled {
                 transform: translateX(0) !important;
+                box-shadow: 20px 0 50px rgba(0,0,0,0.8) !important;
             }
         </style>
     </head>
