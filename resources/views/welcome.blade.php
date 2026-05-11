@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>IWK RW 04 - Sistem Transparansi Kas Iuran Warga</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,7 +241,8 @@
         /* OPTIMASI MOBILE (Media Queries) */
         @media (max-width: 768px) {
             /* 1. Padding & Margin diperkecil */
-            section { padding-top: 3rem !important; padding-bottom: 3rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+            section { padding-top: 3rem !important; padding-bottom: 3rem !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+            .hero-gradient { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
             
             /* 2. Ukuran Teks (H1 & H2) lebih proporsional */
             h1 { font-size: 2.25rem !important; line-height: 1.2 !important; }
@@ -255,6 +256,11 @@
             }
             .light-mode .floating-pill-nav, .light-mode .dashboard-footer {
                 background: rgba(255, 255, 255, 0.98) !important;
+            }
+
+            /* 4. Memaksa tim pengembang menjadi 1 kolom vertikal */
+            .tim-pengembang .grid { 
+                grid-template-columns: repeat(1, minmax(0, 1fr)) !important; 
             }
         }
         /* --- STYLES KHUSUS MODE GELAP (FINAL PREMIUM SCOPED) --- */
