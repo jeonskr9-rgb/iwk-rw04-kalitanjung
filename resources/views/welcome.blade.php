@@ -358,6 +358,32 @@
             -webkit-mask-image: radial-gradient(circle, black 80%, transparent 100%);
             mask-image: radial-gradient(circle, black 80%, transparent 100%);
         }
+
+        /* GLOBAL MOBILE TRANSFORMATION */
+        @media (max-width: 768px) {
+            /* Force Stack Grid */
+            .row { display: flex !important; flex-direction: column !important; }
+            .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+                width: 100% !important;
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Spacing & Typography */
+            h1 { font-size: 2rem !important; }
+            h2 { font-size: 1.5rem !important; }
+            section { padding: 3rem 1.5rem !important; }
+            .p-10 { padding: 1.5rem !important; }
+            
+            /* Responsive Table */
+            .table-responsive {
+                width: 100% !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+                display: block !important;
+            }
+        }
     </style>
 </head>
 <body class="antialiased font-sans">
@@ -949,7 +975,7 @@
             </p>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -957,24 +983,26 @@
 
         function setTheme(theme) {
             if (theme === 'light') {
-                document.body.classList.remove('dark');
-                lightIcon.style.display = 'block';
+                document.body.classList.add('light-mode');
                 darkIcon.style.display = 'none';
+                lightIcon.style.display = 'block';
             } else {
-                document.body.classList.add('dark');
+                document.body.classList.remove('light-mode');
                 darkIcon.style.display = 'block';
                 lightIcon.style.display = 'none';
             }
-            localStorage.setItem('theme', theme);
         }
 
-        // Initialize theme on load
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        setTheme(savedTheme);
+        setTheme(localStorage.getItem('theme') || 'dark');
 
-        themeToggleBtn.addEventListener('click', function() {
-            const currentTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
-            setTheme(currentTheme);
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'dark');
+                setTheme('dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+                setTheme('light');
+            }
         });
     </script>
 </body>

@@ -285,44 +285,55 @@
             html.dark .bg-indigo-600 * { 
                 color: #ffffff !important; /* Putih Bersih */
             }
-            /* --- FLUID SCALING & MOBILE STABILIZATION --- */
+            /* --- FLUID SCALING & MOBILE STABILIZATION ---            /* GLOBAL MOBILE TRANSFORMATION */
             @media (max-width: 768px) {
-                html, body {
-                    overflow-x: hidden !important;
-                    position: relative !important;
-                }
-                
-                /* 2-Column Grid on Mobile for efficiency */
-                .grid, .row, [class*="grid-cols-"], [class*="col-"] {
-                    display: grid !important;
-                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                    gap: 0.75rem !important;
+                /* Force Stack Grid */
+                .row { display: flex !important; flex-direction: column !important; margin-left: 0 !important; margin-right: 0 !important; }
+                .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
                     width: 100% !important;
+                    flex: 0 0 100% !important;
+                    max-width: 100% !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    margin-bottom: 1rem;
                 }
 
-                /* Table Container remains scrollable */
-                .table-container { 
-                    overflow-x: auto !important;
-                    background: var(--bg-card);
-                    padding: 0.5rem;
-                    border-radius: 1rem;
-                    grid-column: span 2 !important; /* Force tables to take full width */
-                }
-
-                /* Header Spacer to prevent overlap */
-                main { padding-top: 5rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
-                
-                /* Typography Scaling */
+                /* Typography & Spacing */
+                body { font-size: 0.95rem !important; }
                 h1 { font-size: 1.5rem !important; }
                 h2 { font-size: 1.25rem !important; }
+                .p-8, .p-10, .p-12 { padding: 1.5rem !important; }
+                .container, .container-fluid { padding-left: 1rem !important; padding-right: 1rem !important; }
                 
-                /* Touch Target size */
-                button, a.rounded-2xl { min-height: 44px !important; }
+                /* Sidebar Mobile Behavior */
+                #sidebar {
+                    position: fixed !important;
+                    top: 0;
+                    left: 0;
+                    height: 100vh;
+                    z-index: 100;
+                    width: 280px !important;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                /* Table Responsive Force */
+                .table-responsive, .table-container {
+                    width: 100% !important;
+                    overflow-x: auto !important;
+                    -webkit-overflow-scrolling: touch;
+                    display: block !important;
+                }
+                
+                /* Layout Adjustment */
+                .flex-1.transition-all { margin-left: 0 !important; width: 100% !important; }
             }
 
-            #sidebar.toggled {
-                transform: translateX(0) !important;
-                box-shadow: 20px 0 50px rgba(0,0,0,0.8) !important;
+            /* Responsive Table Standard */
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 1rem;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
             }
         </style>
     </head>
@@ -339,7 +350,19 @@
                 }
             })();
         </script>
-        <div class="min-h-screen flex flex-col lg:flex-row">
+        <div class="min-h-screen flex flex-col lg:flex-row relative">
+            <!-- Sidebar Overlay for Mobile -->
+            <div x-show="sidebarOpen" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 @click="sidebarOpen = false"
+                 class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] lg:hidden no-print">
+            </div>
+
             @auth
                 @include('layouts.sidebar', ['user' => Auth::user()])
             @endauth
@@ -347,18 +370,18 @@
             <div class="flex-1 {{ Auth::check() ? 'lg:ml-72' : '' }} transition-all duration-300">
                 <!-- MOBILE HEADER (Only visible on mobile) -->
                 @auth
-                <div class="lg:hidden flex items-center justify-between p-4 bg-slate-950 border-b border-white/5 sticky top-0 z-[70] no-print">
+                <div class="lg:hidden flex items-center justify-between p-4 bg-[#020617] border-b border-white/5 sticky top-0 z-[70] no-print">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
                             <i class="fas fa-dollar-sign text-white text-sm"></i>
                         </div>
-                        <span class="font-black text-sm tracking-tight">IWK RW 04</span>
+                        <span class="font-black text-sm tracking-tight text-white">IWK RW 04</span>
                     </div>
-                    <button id="sidebarToggle" class="p-2 text-white bg-white/5 rounded-xl border border-white/10">
+                    <button @click="sidebarOpen = !sidebarOpen" class="p-2 text-white bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all">
                         <div class="w-6 h-5 flex flex-col justify-between">
-                            <span class="w-full h-0.5 bg-current rounded-full"></span>
-                            <span class="w-full h-0.5 bg-current rounded-full"></span>
-                            <span class="w-full h-0.5 bg-current rounded-full"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? 'rotate-45 translate-y-2' : ''"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? 'opacity-0' : ''"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? '-rotate-45 -translate-y-2' : ''"></span>
                         </div>
                     </button>
                 </div>
