@@ -474,7 +474,7 @@
                                                         <i class="fas fa-user-shield text-lg"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="text-base font-black text-white">Ketua RT 01</h6>
+                                                        <h6 class="text-base font-black text-white">Yayat Nurhayat</h6>
                                                         <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Ketua Wilayah</p>
                                                     </div>
                                                 </div>
@@ -484,7 +484,7 @@
                                                         <i class="fas fa-coins text-lg"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="text-base font-black text-white">Bendahara RT 01</h6>
+                                                        <h6 class="text-base font-black text-white">Bambang</h6>
                                                         <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Bendahara Wilayah</p>
                                                     </div>
                                                 </div>

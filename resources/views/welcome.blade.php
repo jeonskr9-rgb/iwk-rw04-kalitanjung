@@ -746,7 +746,7 @@
                                 <i class="fas fa-user-shield text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-black text-black">Ketua RT 01</h4>
+                                <h4 class="text-lg font-black text-black">Yayat Nurhayat</h4>
                                 <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua</p>
                             </div>
                         </div>
@@ -755,7 +755,7 @@
                                 <i class="fas fa-coins text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-black text-black">Bendahara RT 01</h4>
+                                <h4 class="text-lg font-black text-black">Bambang</h4>
                                 <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara</p>
                             </div>
                         </div>
