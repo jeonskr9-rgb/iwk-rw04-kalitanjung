@@ -348,6 +348,16 @@
         /* Glow Visibility */
         .glow-element { display: none; }
         .dark-mode .glow-element, .dark .glow-element { display: block; }
+        .vignette-image {
+            -webkit-mask-image: radial-gradient(circle, black 65%, transparent 100%);
+            mask-image: radial-gradient(circle, black 65%, transparent 100%);
+            transition: all 0.5s ease;
+        }
+        .vignette-image:hover {
+            transform: scale(1.02);
+            -webkit-mask-image: radial-gradient(circle, black 80%, transparent 100%);
+            mask-image: radial-gradient(circle, black 80%, transparent 100%);
+        }
     </style>
 </head>
 <body class="antialiased font-sans">
@@ -401,6 +411,15 @@
                 Transparansi Kas Iuran Warga <br class="hidden md:block">
                 RW 04 Kalitanjung Timur
             </h1>
+
+            <!-- Image with Vignette/Blur Effect -->
+            <div class="mb-10 relative inline-block group">
+                <div class="absolute inset-0 bg-indigo-500/10 blur-[60px] rounded-full scale-90 group-hover:scale-110 transition duration-1000"></div>
+                <img src="{{ asset('img/rw04_sign.jpg') }}?v=1.3" 
+                     class="relative z-10 w-full max-w-[450px] mx-auto rounded-[3rem] shadow-2xl vignette-image"
+                     alt="RW 04 Kalitanjung Timur">
+            </div>
+
             <p class="text-base sm:text-lg md:text-xl text-[#4f46e5] mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed font-bold sub-judul-utama px-2">
                 Membangun kepercayaan warga melalui digitalisasi laporan keuangan yang akurat, otomatis, dan dapat diakses kapan saja.
             </p>
