@@ -457,66 +457,69 @@
                                 </div>
                             </div>
 
-                            <!-- BARIS 2: PENGURUS RT 01 -->
-                            <div class="mb-12 pt-12 border-t border-white/5">
-                                <h5 class="text-center text-slate-500 font-black uppercase tracking-widest text-xs mb-8">PENGURUS WILAYAH RT 01</h5>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                                    <div class="flex items-center gap-6 p-6 rounded-[2rem] bg-white/5 border border-white/10">
-                                        <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400">
-                                            <i class="fas fa-user-shield text-xl"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="text-lg font-black text-white">Ketua RT 01</h6>
-                                            <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Ketua RT 01</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-6 p-6 rounded-[2rem] bg-white/5 border border-white/10">
-                                        <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400">
-                                            <i class="fas fa-coins text-xl"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="text-lg font-black text-white">Bendahara RT 01</h6>
-                                            <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Bendahara RT 01</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- BARIS 3: PENGURUS RT 02 & RT 03 -->
+                            <!-- BARIS 2: SELURUH PENGURUS RT (SEJAJAR 3 KOLOM) -->
                             <div class="pt-12 border-t border-white/5">
-                                <h5 class="text-center text-slate-500 font-black uppercase tracking-widest text-xs mb-8">PENGURUS WILAYAH RT 02 & RT 03</h5>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <!-- Group RT 02 -->
-                                    <div class="space-y-4">
-                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
-                                            <i class="fas fa-user-shield text-indigo-400"></i>
+                                <h5 class="text-center text-indigo-400 font-black uppercase tracking-widest text-[10px] mb-10">PENGURUS WILAYAH (RT 01, RT 02, RT 03)</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    <!-- RT 01 -->
+                                    <div class="space-y-4 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300">
+                                        <div class="text-center mb-6">
+                                            <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 01</span>
+                                        </div>
+                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
+                                            <i class="fas fa-user-shield text-indigo-400 text-sm"></i>
                                             <div>
-                                                <h6 class="text-base font-black text-white">Ketua RT 02</h6>
-                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">KETUA RT 02</p>
+                                                <h6 class="text-sm font-black text-white">Ketua RT 01</h6>
+                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Ketua</p>
                                             </div>
                                         </div>
-                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
-                                            <i class="fas fa-coins text-indigo-400"></i>
+                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
+                                            <i class="fas fa-coins text-indigo-400 text-sm"></i>
                                             <div>
-                                                <h6 class="text-base font-black text-white">Bendahara RT 02</h6>
-                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">BENDAHARA RT 02</p>
+                                                <h6 class="text-sm font-black text-white">Bendahara RT 01</h6>
+                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Bendahara</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Group RT 03 -->
-                                    <div class="space-y-4">
-                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
-                                            <i class="fas fa-user-shield text-indigo-400"></i>
+
+                                    <!-- RT 02 -->
+                                    <div class="space-y-4 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300">
+                                        <div class="text-center mb-6">
+                                            <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 02</span>
+                                        </div>
+                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
+                                            <i class="fas fa-user-shield text-indigo-400 text-sm"></i>
                                             <div>
-                                                <h6 class="text-base font-black text-white">Ketua RT 03</h6>
-                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">KETUA RT 03</p>
+                                                <h6 class="text-sm font-black text-white">Ketua RT 02</h6>
+                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Ketua</p>
                                             </div>
                                         </div>
-                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
-                                            <i class="fas fa-coins text-indigo-400"></i>
+                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
+                                            <i class="fas fa-coins text-indigo-400 text-sm"></i>
                                             <div>
-                                                <h6 class="text-base font-black text-white">Bendahara RT 03</h6>
-                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">BENDAHARA RT 03</p>
+                                                <h6 class="text-sm font-black text-white">Bendahara RT 02</h6>
+                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Bendahara</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- RT 03 -->
+                                    <div class="space-y-4 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300">
+                                        <div class="text-center mb-6">
+                                            <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 03</span>
+                                        </div>
+                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
+                                            <i class="fas fa-user-shield text-indigo-400 text-sm"></i>
+                                            <div>
+                                                <h6 class="text-sm font-black text-white">Ketua RT 03</h6>
+                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Ketua</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
+                                            <i class="fas fa-coins text-indigo-400 text-sm"></i>
+                                            <div>
+                                                <h6 class="text-sm font-black text-white">Bendahara RT 03</h6>
+                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Bendahara</p>
                                             </div>
                                         </div>
                                     </div>
