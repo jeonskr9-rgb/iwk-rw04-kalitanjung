@@ -554,9 +554,45 @@
                                 </div>
                             </div>
 
-                            <div class="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold opacity-30 text-white gap-4">
-                                <span>STMIK IKMI CIREBON - Tim Pengembang IWK</span>
-                                <span>&copy; {{ date('Y') }} RW 04 Kalitanjung Timur</span>
+                            <!-- FOOTER PROFESIONAL 3-KOLOM -->
+                            <div class="mt-24 pt-16 border-t border-white/10">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left md:text-left">
+                                    <!-- Kolom 1: Tentang Proyek -->
+                                    <div class="space-y-6 text-center md:text-left">
+                                        <div class="flex items-center justify-center md:justify-start gap-3">
+                                            <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                                                <i class="fas fa-shield-alt text-white"></i>
+                                            </div>
+                                            <h4 class="text-base font-black text-white tracking-tight">IWK RW 04 Kalitanjung Timur</h4>
+                                        </div>
+                                        <p class="text-[11px] leading-relaxed text-white/50 font-medium max-w-xs mx-auto md:mx-0">
+                                            Sistem Informasi Manajemen Keuangan dan Administrasi Warga berbasis Digital. Komitmen kami adalah menghadirkan transparansi dan kemudahan akses data bagi seluruh warga RW 04.
+                                        </p>
+                                    </div>
+
+                                    <!-- Kolom 2: Lokasi & Wilayah -->
+                                    <div class="space-y-6 text-center md:text-left">
+                                        <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400">Wilayah Pelayanan</h5>
+                                        <p class="text-[11px] leading-relaxed text-white/50 font-medium">
+                                            Mencakup koordinasi administratif untuk RT 01, RT 02, dan RT 03 di lingkungan RW 04 Kalitanjung Timur, Harjamukti, Kota Cirebon.
+                                        </p>
+                                        <div class="flex items-center justify-center md:justify-start gap-2 text-white/30">
+                                            <i class="fas fa-map-marker-alt text-[10px]"></i>
+                                            <span class="text-[9px] font-bold">Harjamukti, Kota Cirebon</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Kolom 3: Informasi Pengembang -->
+                                    <div class="space-y-6 text-center md:text-left">
+                                        <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400">Informasi Sistem</h5>
+                                        <p class="text-[11px] leading-relaxed text-white/50 font-medium">
+                                            Dikembangkan oleh Mahasiswa Sistem Informasi - STMIK IKMI Cirebon sebagai wujud digitalisasi tata kelola lingkungan.
+                                        </p>
+                                        <div class="pt-2">
+                                            <p class="text-[10px] font-black text-white/20 uppercase tracking-widest">&copy; 2026 Hak Cipta Terpelihara.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </footer>
