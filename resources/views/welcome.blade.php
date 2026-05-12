@@ -728,70 +728,90 @@
                     <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
                         <i class="fas fa-wallet text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black mb-2 text-[#000000]">Sri Mufarida</h3>
+                    <h3 class="text-2xl font-black mb-2 text-[#000000]">Asrimawati</h3>
                     <p class="text-xs font-black tracking-widest uppercase text-slate-400">Bendahara RW</p>
                 </div>
             </div>
 
-            <!-- BARIS 2: RT 01 -->
-            <div class="text-center mb-8">
-                <span class="px-6 py-2 bg-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">Wilayah RT 01</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-                <div class="team-card flex items-center gap-6" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-[#4f46e5]">
-                        <i class="fas fa-user-shield text-xl"></i>
+            <!-- BARIS 2: SELURUH RT (SEJAJAR 3 KOLOM) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- RT 01 -->
+                <div class="team-card p-6 rounded-3xl bg-indigo-50/30 border border-indigo-100" onclick="this.classList.toggle('expanded')">
+                    <div class="text-center mb-6">
+                        <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[10px] font-black text-indigo-500 uppercase tracking-widest">Wilayah RT 01</span>
                     </div>
-                    <div>
-                        <h4 class="text-xl font-black text-black">Ketua RT 01</h4>
-                        <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">Ketua RT 01</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#4f46e5] shadow-sm">
+                                <i class="fas fa-user-shield text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-black">Ketua RT 01</h4>
+                                <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#4f46e5] shadow-sm">
+                                <i class="fas fa-coins text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-black">Bendahara RT 01</h4>
+                                <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="team-card flex items-center gap-6" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-[#4f46e5]">
-                        <i class="fas fa-coins text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-black text-black">Bendahara RT 01</h4>
-                        <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">Bendahara RT 01</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- BARIS 3: RT 02 & RT 03 -->
-            <div class="text-center mb-8">
-                <span class="px-6 py-2 bg-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">Wilayah RT 02 & RT 03</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-6">
-                    <div class="team-card flex items-center gap-6" onclick="this.classList.toggle('expanded')">
-                        <i class="fas fa-user-shield text-[#4f46e5]"></i>
-                        <div>
-                            <h4 class="text-lg font-black text-black">Ketua RT 02</h4>
-                            <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua RT 02</p>
-                        </div>
+                <!-- RT 02 -->
+                <div class="team-card p-6 rounded-3xl bg-indigo-50/30 border border-indigo-100" onclick="this.classList.toggle('expanded')">
+                    <div class="text-center mb-6">
+                        <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[10px] font-black text-indigo-500 uppercase tracking-widest">Wilayah RT 02</span>
                     </div>
-                    <div class="team-card flex items-center gap-6" onclick="this.classList.toggle('expanded')">
-                        <i class="fas fa-coins text-[#4f46e5]"></i>
-                        <div>
-                            <h4 class="text-lg font-black text-black">Bendahara RT 02</h4>
-                            <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara RT 02</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#4f46e5] shadow-sm">
+                                <i class="fas fa-user-shield text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-black">Ketua RT 02</h4>
+                                <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#4f46e5] shadow-sm">
+                                <i class="fas fa-coins text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-black">Bendahara RT 02</h4>
+                                <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="space-y-6">
-                    <div class="team-card flex items-center gap-6" onclick="this.classList.toggle('expanded')">
-                        <i class="fas fa-user-shield text-[#4f46e5]"></i>
-                        <div>
-                            <h4 class="text-lg font-black text-black">Ketua RT 03</h4>
-                            <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua RT 03</p>
-                        </div>
+
+                <!-- RT 03 -->
+                <div class="team-card p-6 rounded-3xl bg-indigo-50/30 border border-indigo-100" onclick="this.classList.toggle('expanded')">
+                    <div class="text-center mb-6">
+                        <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[10px] font-black text-indigo-500 uppercase tracking-widest">Wilayah RT 03</span>
                     </div>
-                    <div class="team-card flex items-center gap-6" onclick="this.classList.toggle('expanded')">
-                        <i class="fas fa-coins text-[#4f46e5]"></i>
-                        <div>
-                            <h4 class="text-lg font-black text-black">Bendahara RT 03</h4>
-                            <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara RT 03</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#4f46e5] shadow-sm">
+                                <i class="fas fa-user-shield text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-black">Ketua RT 03</h4>
+                                <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#4f46e5] shadow-sm">
+                                <i class="fas fa-coins text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-black">Bendahara RT 03</h4>
+                                <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara</p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -451,75 +451,103 @@
                                         <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mb-6 text-white">
                                             <i class="fas fa-wallet text-3xl"></i>
                                         </div>
-                                        <h6 class="text-xl font-black text-white">Sri Mufarida</h6>
+                                        <h6 class="text-xl font-black text-white">Asrimawati</h6>
                                         <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Bendahara RW</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- BARIS 2: SELURUH PENGURUS RT (SEJAJAR 3 KOLOM) -->
+                            <!-- BARIS 2: SELURUH PENGURUS RT (UNIFIED CARDS - SEJAJAR 3 KOLOM) -->
                             <div class="pt-12 border-t border-white/5">
                                 <h5 class="text-center text-indigo-400 font-black uppercase tracking-widest text-[10px] mb-10">PENGURUS WILAYAH (RT 01, RT 02, RT 03)</h5>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                    <!-- RT 01 -->
-                                    <div class="space-y-4 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300">
-                                        <div class="text-center mb-6">
-                                            <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 01</span>
-                                        </div>
-                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
-                                            <i class="fas fa-user-shield text-indigo-400 text-sm"></i>
-                                            <div>
-                                                <h6 class="text-sm font-black text-white">Ketua RT 01</h6>
-                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Ketua</p>
+                                <div class="row g-4">
+                                    
+                                    <!-- UNIFIED CARD RT 01 -->
+                                    <div class="col-md-4">
+                                        <div class="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300 h-100">
+                                            <div class="text-center mb-8">
+                                                <span class="px-5 py-2 bg-indigo-500/10 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 01</span>
                                             </div>
-                                        </div>
-                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
-                                            <i class="fas fa-coins text-indigo-400 text-sm"></i>
-                                            <div>
-                                                <h6 class="text-sm font-black text-white">Bendahara RT 01</h6>
-                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Bendahara</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- RT 02 -->
-                                    <div class="space-y-4 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300">
-                                        <div class="text-center mb-6">
-                                            <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 02</span>
-                                        </div>
-                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
-                                            <i class="fas fa-user-shield text-indigo-400 text-sm"></i>
-                                            <div>
-                                                <h6 class="text-sm font-black text-white">Ketua RT 02</h6>
-                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Ketua</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
-                                            <i class="fas fa-coins text-indigo-400 text-sm"></i>
-                                            <div>
-                                                <h6 class="text-sm font-black text-white">Bendahara RT 02</h6>
-                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Bendahara</p>
+                                            <div class="space-y-6">
+                                                <div class="flex items-center gap-5">
+                                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-2xl flex items-center justify-center text-indigo-400">
+                                                        <i class="fas fa-user-shield text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="text-base font-black text-white">Ketua RT 01</h6>
+                                                        <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Ketua Wilayah</p>
+                                                    </div>
+                                                </div>
+                                                <div class="h-px bg-white/5 w-full"></div>
+                                                <div class="flex items-center gap-5">
+                                                    <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
+                                                        <i class="fas fa-coins text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="text-base font-black text-white">Bendahara RT 01</h6>
+                                                        <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Bendahara Wilayah</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- RT 03 -->
-                                    <div class="space-y-4 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300">
-                                        <div class="text-center mb-6">
-                                            <span class="px-4 py-1.5 bg-indigo-500/10 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 03</span>
-                                        </div>
-                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
-                                            <i class="fas fa-user-shield text-indigo-400 text-sm"></i>
-                                            <div>
-                                                <h6 class="text-sm font-black text-white">Ketua RT 03</h6>
-                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Ketua</p>
+                                    <!-- UNIFIED CARD RT 02 -->
+                                    <div class="col-md-4">
+                                        <div class="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300 h-100">
+                                            <div class="text-center mb-8">
+                                                <span class="px-5 py-2 bg-indigo-500/10 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 02</span>
+                                            </div>
+                                            <div class="space-y-6">
+                                                <div class="flex items-center gap-5">
+                                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-2xl flex items-center justify-center text-indigo-400">
+                                                        <i class="fas fa-user-shield text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="text-base font-black text-white">Ketua RT 02</h6>
+                                                        <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Ketua Wilayah</p>
+                                                    </div>
+                                                </div>
+                                                <div class="h-px bg-white/5 w-full"></div>
+                                                <div class="flex items-center gap-5">
+                                                    <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
+                                                        <i class="fas fa-coins text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="text-base font-black text-white">Bendahara RT 02</h6>
+                                                        <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Bendahara Wilayah</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5">
-                                            <i class="fas fa-coins text-indigo-400 text-sm"></i>
-                                            <div>
-                                                <h6 class="text-sm font-black text-white">Bendahara RT 03</h6>
-                                                <p class="text-[8px] opacity-40 uppercase font-bold text-white">Bendahara</p>
+                                    </div>
+
+                                    <!-- UNIFIED CARD RT 03 -->
+                                    <div class="col-md-4">
+                                        <div class="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition-all duration-300 h-100">
+                                            <div class="text-center mb-8">
+                                                <span class="px-5 py-2 bg-indigo-500/10 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Wilayah RT 03</span>
+                                            </div>
+                                            <div class="space-y-6">
+                                                <div class="flex items-center gap-5">
+                                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-2xl flex items-center justify-center text-indigo-400">
+                                                        <i class="fas fa-user-shield text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="text-base font-black text-white">Ketua RT 03</h6>
+                                                        <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Ketua Wilayah</p>
+                                                    </div>
+                                                </div>
+                                                <div class="h-px bg-white/5 w-full"></div>
+                                                <div class="flex items-center gap-5">
+                                                    <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
+                                                        <i class="fas fa-coins text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="text-base font-black text-white">Bendahara RT 03</h6>
+                                                        <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Bendahara Wilayah</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
