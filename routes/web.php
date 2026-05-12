@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+// FORCE CACHE PURGE (Temporary)
+Artisan::call('view:clear');
 
 Route::get('/', function () {
     return view('welcome');
