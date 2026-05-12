@@ -83,10 +83,35 @@
             display: none !important; 
         }
 
-        .dark-mode .hero-gradient, .dark .hero-gradient {
+        .dark-mode .hero-gradient, .dark .hero-gradient,
+        .dark-mode section, .dark section,
+        .dark-mode header, .dark header,
+        .dark-mode footer, .dark footer {
             background: #020617 !important;
-            position: relative;
-            z-index: 10;
+        }
+
+        /* Override bg-white specifically for dark mode */
+        .dark-mode .bg-white, .dark .bg-white,
+        .dark-mode .guide-card, .dark .guide-card,
+        .dark-mode .guide-sub-card, .dark .guide-sub-card,
+        .dark-mode details.group, .dark details.group {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .dark-mode h1, .dark h1,
+        .dark-mode h2, .dark h2,
+        .dark-mode h3, .dark h3,
+        .dark-mode h4, .dark h4,
+        .dark-mode p, .dark p,
+        .dark-mode span, .dark span,
+        .dark-mode summary, .dark summary {
+            color: #f8fafc !important;
+        }
+
+        .dark-mode .text-slate-600, .dark .text-slate-600,
+        .dark-mode .text-slate-500, .dark .text-slate-500 {
+            color: #94a3b8 !important;
         }
         .glass {
             background: rgba(255, 255, 255, 0.8);
