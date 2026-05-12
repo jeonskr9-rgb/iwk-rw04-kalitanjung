@@ -1,5 +1,5 @@
 <aside id="sidebar"
-    class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[2000] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform -translate-x-full lg:translate-x-0">
+    class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[3000] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform -translate-x-full lg:translate-x-0">
     <!-- Branding & Close Button -->
     <div class="p-8 flex items-center justify-between">
         <div class="flex items-center space-x-3">

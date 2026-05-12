@@ -312,7 +312,7 @@
                     top: 0;
                     left: 0;
                     height: 100vh;
-                    z-index: 100;
+                    z-index: 3000 !important;
                     width: 280px !important;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 }
@@ -355,7 +355,7 @@
             <!-- Sidebar Overlay for Mobile -->
             <div id="sidebarOverlay" 
                  onclick="toggleSidebar()"
-                 class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[1500] lg:hidden no-print">
+                 class="hidden fixed inset-0 bg-black/70 z-[2000] lg:hidden no-print">
             </div>
 
             @auth
