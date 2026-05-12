@@ -415,8 +415,9 @@
             <!-- Image with Vignette/Blur Effect -->
             <div class="mb-10 relative inline-block group">
                 <div class="absolute inset-0 bg-indigo-500/10 blur-[60px] rounded-full scale-90 group-hover:scale-110 transition duration-1000"></div>
-                <img src="{{ asset('img/rw04_sign.jpeg') }}?v=1.3" 
+                <img src="{{ url('img/rw04_sign.jpeg') }}?v={{ time() }}" 
                      class="relative z-10 w-full max-w-[450px] mx-auto rounded-[3rem] shadow-2xl vignette-image"
+                     style="display: block !important;"
                      alt="RW 04 Kalitanjung Timur">
             </div>
 
