@@ -773,7 +773,7 @@
                                 <i class="fas fa-user-shield text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-black text-black">Ketua RT 02</h4>
+                                <h4 class="text-lg font-black text-black">Yuyun Yuningsih</h4>
                                 <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua</p>
                             </div>
                         </div>
@@ -782,7 +782,7 @@
                                 <i class="fas fa-coins text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-black text-black">Bendahara RT 02</h4>
+                                <h4 class="text-lg font-black text-black">Nokmala</h4>
                                 <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara</p>
                             </div>
                         </div>
@@ -800,7 +800,7 @@
                                 <i class="fas fa-user-shield text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-black text-black">Ketua RT 03</h4>
+                                <h4 class="text-lg font-black text-black">Cici Surahman</h4>
                                 <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Ketua</p>
                             </div>
                         </div>
@@ -809,7 +809,7 @@
                                 <i class="fas fa-coins text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-black text-black">Bendahara RT 03</h4>
+                                <h4 class="text-lg font-black text-black">Sri Mufarida</h4>
                                 <p class="text-[9px] font-black tracking-widest uppercase text-slate-400">Bendahara</p>
                             </div>
                         </div>

@@ -504,7 +504,7 @@
                                                         <i class="fas fa-user-shield text-lg"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="text-base font-black text-white">Ketua RT 02</h6>
+                                                        <h6 class="text-base font-black text-white">Yuyun Yuningsih</h6>
                                                         <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Ketua Wilayah</p>
                                                     </div>
                                                 </div>
@@ -514,7 +514,7 @@
                                                         <i class="fas fa-coins text-lg"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="text-base font-black text-white">Bendahara RT 02</h6>
+                                                        <h6 class="text-base font-black text-white">Nokmala</h6>
                                                         <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Bendahara Wilayah</p>
                                                     </div>
                                                 </div>
@@ -534,7 +534,7 @@
                                                         <i class="fas fa-user-shield text-lg"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="text-base font-black text-white">Ketua RT 03</h6>
+                                                        <h6 class="text-base font-black text-white">Cici Surahman</h6>
                                                         <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Ketua Wilayah</p>
                                                     </div>
                                                 </div>
@@ -544,7 +544,7 @@
                                                         <i class="fas fa-coins text-lg"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="text-base font-black text-white">Bendahara RT 03</h6>
+                                                        <h6 class="text-base font-black text-white">Sri Mufarida</h6>
                                                         <p class="text-[9px] opacity-40 uppercase font-bold text-white tracking-tighter">Bendahara Wilayah</p>
                                                     </div>
                                                 </div>
