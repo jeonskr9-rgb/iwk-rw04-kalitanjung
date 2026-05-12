@@ -353,15 +353,9 @@
         </script>
         <div class="min-h-screen flex flex-col lg:flex-row relative">
             <!-- Sidebar Overlay for Mobile -->
-            <div x-show="sidebarOpen" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0"
-                 x-transition:enter-end="opacity-100"
-                 x-transition:leave="transition ease-in duration-300"
-                 x-transition:leave-start="opacity-100"
-                 x-transition:leave-end="opacity-0"
-                 @click="sidebarOpen = false"
-                 class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] lg:hidden no-print">
+            <div id="sidebarOverlay" 
+                 onclick="toggleSidebar()"
+                 class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[1500] lg:hidden no-print">
             </div>
 
             @auth
@@ -371,23 +365,23 @@
             <div class="flex-1 {{ Auth::check() ? 'lg:ml-72' : '' }} transition-all duration-300">
                 <!-- MOBILE HEADER (Only visible on mobile) -->
                 @auth
-                <div class="lg:hidden flex items-center justify-between p-4 bg-[#020617] border-b border-white/5 sticky top-0 z-[110] no-print">
+                <div class="lg:hidden flex items-center justify-between p-4 bg-[#020617] border-b border-white/5 sticky top-0 z-[1000] no-print">
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
                             <i class="fas fa-dollar-sign text-white text-sm"></i>
                         </div>
                         <span class="font-black text-sm tracking-tight text-white">IWK RW 04</span>
                     </div>
-                    <button @click="sidebarOpen = !sidebarOpen" class="p-2 text-white bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all z-[120]">
+                    <button onclick="toggleSidebar()" class="p-2 text-white bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all">
                         <div class="w-6 h-5 flex flex-col justify-between">
-                            <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? 'rotate-45 translate-y-2' : ''"></span>
-                            <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? 'opacity-0' : ''"></span>
-                            <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? '-rotate-45 -translate-y-2' : ''"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all"></span>
                         </div>
                     </button>
                 </div>
                 @endauth
-                <div class="fixed top-6 right-8 z-[60] flex items-center space-x-4 no-print">
+                <div class="hidden lg:flex fixed top-6 right-8 z-[60] items-center space-x-4 no-print">
                     @auth
                     <div class="flex items-center space-x-3">
                         <div class="flex flex-col items-end">
@@ -685,6 +679,21 @@
                 } else {
                     input.type = 'password';
                     icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            }
+        </script>
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('translate-x-0');
+                    overlay.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('translate-x-0');
+                    overlay.classList.add('hidden');
                 }
             }
         </script>

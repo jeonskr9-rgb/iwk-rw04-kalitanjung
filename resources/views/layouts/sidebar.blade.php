@@ -1,7 +1,5 @@
 <aside id="sidebar"
-    class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[100] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform"
-    :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
-    @click.away="sidebarOpen = false">
+    class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[2000] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform -translate-x-full lg:translate-x-0">
     <!-- Branding & Close Button -->
     <div class="p-8 flex items-center justify-between">
         <div class="flex items-center space-x-3">
@@ -19,7 +17,7 @@
         </div>
         
         <!-- Mobile Close Button -->
-        <button @click="sidebarOpen = false" class="lg:hidden p-2 text-slate-400 hover:text-white transition-colors">
+        <button onclick="toggleSidebar()" class="lg:hidden p-2 text-slate-400 hover:text-white transition-colors">
             <i class="fas fa-times text-xl"></i>
         </button>
     </div>
