@@ -870,76 +870,44 @@
         .footer-team-item:hover { transform: translateX(5px); color: #818cf8; }
         .light-mode .footer-team-item:hover { color: #4f46e5; }
     </style>
-    <footer class="dashboard-footer mt-12 py-10 px-6 sm:px-10 lg:px-12 transition-all duration-300 no-print">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
-            <!-- Tentang Projek -->
-            <div>
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 bg-[#4f46e5] rounded-xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-dollar-sign text-white"></i>
+    <!-- FOOTER PROFESIONAL 3-KOLOM -->
+    <footer class="mt-24 pt-16 pb-12 border-t border-slate-100 bg-white/50 backdrop-blur-md no-print">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                <!-- Kolom 1: Tentang Proyek -->
+                <div class="space-y-6">
+                    <div class="flex items-center justify-center md:justify-start gap-3">
+                        <div class="w-10 h-10 bg-[#4f46e5] rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <h4 class="text-base font-black text-slate-900 tracking-tight">IWK RW 04 Kalitanjung Timur</h4>
                     </div>
-                    <h3 class="text-xl font-black tracking-tight text-white dark:text-white">Sistem IWK</h3>
+                    <p class="text-xs leading-relaxed text-slate-500 font-medium max-w-xs mx-auto md:mx-0">
+                        Sistem Informasi Manajemen Keuangan dan Administrasi Warga berbasis Digital. Komitmen kami adalah menghadirkan transparansi dan kemudahan akses data bagi seluruh warga RW 04.
+                    </p>
                 </div>
-                <p class="text-sm opacity-80 leading-relaxed font-medium">
-                    Sistem Informasi Iuran Warga (IWK) merupakan inovasi digitalisasi administrasi keuangan tingkat rukun warga di lingkungan <strong>RW 04 Kalitanjung Timur</strong>. Mengutamakan transparansi, efisiensi, dan akuntabilitas.
-                </p>
-            </div>
 
-            <!-- Tim Pengembang -->
-            <div>
-                <h4 class="text-sm font-black uppercase tracking-widest mb-6 opacity-60">Tim Pengembang (STMIK IKMI)</h4>
-                <ul class="space-y-4 text-sm font-bold">
-                    <li class="footer-team-item flex items-center gap-3 cursor-default">
-                        <i class="fas fa-terminal w-4 text-center"></i>
-                        <div>Sekar Tanjung Maulidia <span class="block text-[10px] opacity-60 font-normal">Manager Project + Backend</span></div>
-                    </li>
-                    <li class="footer-team-item flex items-center gap-3 cursor-default">
-                        <i class="fas fa-palette w-4 text-center"></i>
-                        <div>Nurkholissah Anindia M. <span class="block text-[10px] opacity-60 font-normal">UI/UX Designer + Tester</span></div>
-                    </li>
-                    <li class="footer-team-item flex items-center gap-3 cursor-default">
-                        <i class="fas fa-desktop w-4 text-center"></i>
-                        <div>Rachmawati Sya'adah <span class="block text-[10px] opacity-60 font-normal">Assistance Manager + Frontend</span></div>
-                    </li>
-                    <li class="footer-team-item flex items-center gap-3 cursor-default">
-                        <i class="fas fa-microchip w-4 text-center"></i>
-                        <div>Suci Febriyanti <span class="block text-[10px] opacity-60 font-normal">Analis + Database Designer</span></div>
-                    </li>
-                    <li class="footer-team-item flex items-center gap-3 cursor-default">
-                        <i class="fas fa-book-open w-4 text-center"></i>
-                        <div>Chamailia <span class="block text-[10px] opacity-60 font-normal">Dokumentasi + Jurnal + LO</span></div>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Lokasi & Kontak -->
-            <div>
-                <h4 class="text-sm font-black uppercase tracking-widest mb-6 opacity-60">Lokasi Pusat</h4>
-                <a href="https://www.google.com/maps/search/?api=1&query=RT.02+RW.04+Kalitanjung+Timur+Kota+Cirebon+45143" target="_blank" class="block group">
-                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 group-hover:bg-indigo-500/10 group-hover:border-indigo-500/20 transition-all duration-300">
-                        <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
-                            <i class="fas fa-map-marker-alt text-indigo-400 group-hover:animate-bounce"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold leading-relaxed">Sekretariat RW 04</p>
-                            <p class="text-xs opacity-70 mt-1">Kalitanjung Timur, Kec. Harjamukti, Kota Cirebon, Jawa Barat 45143</p>
-                            <div class="mt-4 pt-4 border-t border-white/5 space-y-2">
-                                <p class="text-xs font-bold flex items-center gap-2">
-                                    <i class="fas fa-phone text-indigo-400 text-[10px]"></i>
-                                    +62 812-3456-7890
-                                </p>
-                                <p class="text-xs font-bold flex items-center gap-2">
-                                    <i class="fas fa-envelope text-indigo-400 text-[10px]"></i>
-                                    admin@iwk-rw04.com
-                                </p>
-                            </div>
-                        </div>
+                <!-- Kolom 2: Lokasi & Wilayah -->
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#4f46e5]">Wilayah Pelayanan</h5>
+                    <p class="text-xs leading-relaxed text-slate-500 font-medium">
+                        Mencakup koordinasi administratif untuk RT 01, RT 02, dan RT 03 di lingkungan RW 04 Kalitanjung Timur, Harjamukti, Kota Cirebon.
+                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-2 text-slate-400">
+                        <i class="fas fa-map-marker-alt text-[10px]"></i>
+                        <span class="text-[9px] font-bold">Harjamukti, Kota Cirebon</span>
                     </div>
-                </a>
-                
-                <div class="mt-8 pt-8 border-t border-white/10 flex justify-between items-center text-xs font-bold opacity-50">
-                    <span>&copy; {{ date('Y') }} Hak Cipta Dilindungi.</span>
-                    <span>v1.0.0</span>
+                </div>
+
+                <!-- Kolom 3: Informasi Pengembang -->
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#4f46e5]">Informasi Sistem</h5>
+                    <p class="text-xs leading-relaxed text-slate-500 font-medium">
+                        Dikembangkan oleh Mahasiswa Sistem Informasi - STMIK IKMI Cirebon sebagai wujud digitalisasi tata kelola lingkungan.
+                    </p>
+                    <div class="pt-2">
+                        <p class="text-[10px] font-black text-slate-300 uppercase tracking-widest">&copy; 2026 Hak Cipta Terpelihara.</p>
+                    </div>
                 </div>
             </div>
         </div>
