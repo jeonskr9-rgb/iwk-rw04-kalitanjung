@@ -278,14 +278,15 @@
             /* 6. Success Alert & Button Contrast (Dark Mode) */
             html.dark .bg-emerald-50 span, 
             html.dark .text-emerald-700 {
-                color: #064E3B !important; /* Hijau Sangat Tua */
+                color: #064E3B !important;
             }
 
             html.dark .bg-indigo-600, 
             html.dark .bg-indigo-600 * { 
-                color: #ffffff !important; /* Putih Bersih */
+                color: #ffffff !important;
             }
-            /* --- FLUID SCALING & MOBILE STABILIZATION ---            /* GLOBAL MOBILE TRANSFORMATION */
+
+            /* GLOBAL MOBILE TRANSFORMATION */
             @media (max-width: 768px) {
                 /* Force Stack Grid */
                 .row { display: flex !important; flex-direction: column !important; margin-left: 0 !important; margin-right: 0 !important; }
@@ -293,8 +294,8 @@
                     width: 100% !important;
                     flex: 0 0 100% !important;
                     max-width: 100% !important;
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
+                    padding-left: 0.5rem !important;
+                    padding-right: 0.5rem !important;
                     margin-bottom: 1rem;
                 }
 
@@ -303,7 +304,7 @@
                 h1 { font-size: 1.5rem !important; }
                 h2 { font-size: 1.25rem !important; }
                 .p-8, .p-10, .p-12 { padding: 1.5rem !important; }
-                .container, .container-fluid { padding-left: 1rem !important; padding-right: 1rem !important; }
+                .container, .container-fluid { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
                 
                 /* Sidebar Mobile Behavior */
                 #sidebar {

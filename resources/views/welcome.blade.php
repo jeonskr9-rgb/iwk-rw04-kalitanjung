@@ -984,25 +984,27 @@
         function setTheme(theme) {
             if (theme === 'light') {
                 document.body.classList.add('light-mode');
-                darkIcon.style.display = 'none';
-                lightIcon.style.display = 'block';
+                document.documentElement.classList.add('light');
+                document.documentElement.classList.remove('dark');
+                if(darkIcon) darkIcon.style.display = 'none';
+                if(lightIcon) lightIcon.style.display = 'block';
             } else {
                 document.body.classList.remove('light-mode');
-                darkIcon.style.display = 'block';
-                lightIcon.style.display = 'none';
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+                if(darkIcon) darkIcon.style.display = 'block';
+                if(lightIcon) lightIcon.style.display = 'none';
             }
         }
 
-        setTheme(localStorage.getItem('theme') || 'dark');
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
 
         themeToggleBtn.addEventListener('click', () => {
-            if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'dark');
-                setTheme('dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-                setTheme('light');
-            }
+            const isLight = document.body.classList.contains('light-mode');
+            const newTheme = isLight ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            setTheme(newTheme);
         });
     </script>
 </body>
