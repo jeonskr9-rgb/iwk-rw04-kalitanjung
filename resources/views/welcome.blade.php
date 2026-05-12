@@ -703,55 +703,37 @@
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-black mb-6 text-black tracking-tight">
-                    Tim Pengembang Sistem IWK - Desa Kalitanjung Timur
+                    Struktur Organisasi RW 04 Kalitanjung Timur
                 </h2>
                 <div class="h-1.5 w-32 bg-[#4f46e5] mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <!-- Sekar Tanjung -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Ketua RW -->
                 <div class="team-card text-center" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
-                        <i class="fas fa-terminal text-xl"></i>
+                    <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
+                        <i class="fas fa-user-tie text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-black mb-1 text-[#000000]">Sekar Tanjung Maulidia</h3>
-                    <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">Manager Project + Backend</p>
+                    <h3 class="text-2xl font-black mb-2 text-[#000000]">Toto S</h3>
+                    <p class="text-xs font-black tracking-widest uppercase text-slate-400">Ketua RW 04</p>
                 </div>
 
-                <!-- Nurkholissah -->
+                <!-- Sekretaris RW -->
                 <div class="team-card text-center" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
-                        <i class="fas fa-palette text-xl"></i>
+                    <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
+                        <i class="fas fa-file-alt text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-black mb-1 text-[#000000]">Nurkholissah Anindia Mustika</h3>
-                    <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">UI/UX Designer + Tester</p>
+                    <h3 class="text-2xl font-black mb-2 text-[#000000]">Sekretaris RW</h3>
+                    <p class="text-xs font-black tracking-widest uppercase text-slate-400">Sekretaris</p>
                 </div>
 
-                <!-- Rachmawati -->
+                <!-- Bendahara RW -->
                 <div class="team-card text-center" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
-                        <i class="fas fa-desktop text-xl"></i>
+                    <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
+                        <i class="fas fa-wallet text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-black mb-1 text-[#000000]">Rachmawati Sya’adah</h3>
-                    <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">Assistance Manager + Frontend</p>
-                </div>
-
-                <!-- Suci -->
-                <div class="team-card text-center" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
-                        <i class="fas fa-microchip text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-black mb-1 text-[#000000]">Suci Febriyanti</h3>
-                    <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">Analis + Database Designer</p>
-                </div>
-
-                <!-- Chamailia -->
-                <div class="team-card text-center" onclick="this.classList.toggle('expanded')">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mx-auto mb-8 text-[#4f46e5]">
-                        <i class="fas fa-book-open text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-black mb-1 text-[#000000]">Chamailia</h3>
-                    <p class="text-[10px] font-black tracking-widest uppercase text-slate-400">Dokumentasi + Jurnal + LO</p>
+                    <h3 class="text-2xl font-black mb-2 text-[#000000]">Sri Mufarida</h3>
+                    <p class="text-xs font-black tracking-widest uppercase text-slate-400">Bendahara RW</p>
                 </div>
             </div>
 
