@@ -78,8 +78,13 @@
             background-image: none !important;
         }
         
+        .dark-mode .glow-element, .dark .glow-element,
+        .dark-mode .hero-gradient::before, .dark .hero-gradient::before { 
+            display: none !important; 
+        }
+
         .dark-mode .hero-gradient, .dark .hero-gradient {
-            background: transparent;
+            background: #020617 !important;
             position: relative;
             z-index: 10;
         }
