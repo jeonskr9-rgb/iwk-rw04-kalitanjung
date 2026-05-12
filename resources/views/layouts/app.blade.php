@@ -371,14 +371,14 @@
             <div class="flex-1 {{ Auth::check() ? 'lg:ml-72' : '' }} transition-all duration-300">
                 <!-- MOBILE HEADER (Only visible on mobile) -->
                 @auth
-                <div class="lg:hidden flex items-center justify-between p-4 bg-[#020617] border-b border-white/5 sticky top-0 z-[70] no-print">
+                <div class="lg:hidden flex items-center justify-between p-4 bg-[#020617] border-b border-white/5 sticky top-0 z-[110] no-print">
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
                             <i class="fas fa-dollar-sign text-white text-sm"></i>
                         </div>
                         <span class="font-black text-sm tracking-tight text-white">IWK RW 04</span>
                     </div>
-                    <button @click="sidebarOpen = !sidebarOpen" class="p-2 text-white bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all">
+                    <button @click="sidebarOpen = !sidebarOpen" class="p-2 text-white bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all z-[120]">
                         <div class="w-6 h-5 flex flex-col justify-between">
                             <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? 'rotate-45 translate-y-2' : ''"></span>
                             <span class="w-full h-0.5 bg-current rounded-full transition-all" :class="sidebarOpen ? 'opacity-0' : ''"></span>

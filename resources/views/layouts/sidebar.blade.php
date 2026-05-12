@@ -2,8 +2,8 @@
     class="fixed left-0 top-0 h-full w-72 bg-slate-950 z-[100] lg:flex flex-col overflow-y-auto border-r border-white/5 transition-transform duration-300 transform"
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
     @click.away="sidebarOpen = false">
-    <!-- Branding -->
-    <div class="p-8">
+    <!-- Branding & Close Button -->
+    <div class="p-8 flex items-center justify-between">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -17,6 +17,11 @@
                 </p>
             </div>
         </div>
+        
+        <!-- Mobile Close Button -->
+        <button @click="sidebarOpen = false" class="lg:hidden p-2 text-slate-400 hover:text-white transition-colors">
+            <i class="fas fa-times text-xl"></i>
+        </button>
     </div>
 
     <!-- Navigation -->
