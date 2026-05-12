@@ -73,7 +73,8 @@
         }
 
         /* --- STYLES KHUSUS MODE GELAP (SCOPED) --- */
-        .dark-mode, .dark {
+        .dark-mode, .dark,
+        .dark-mode body, .dark body {
             background-color: #020617 !important;
             background-image: none !important;
         }
@@ -86,11 +87,16 @@
         .dark-mode .hero-gradient, .dark .hero-gradient,
         .dark-mode section, .dark section,
         .dark-mode header, .dark header,
-        .dark-mode footer, .dark footer {
+        .dark-mode footer, .dark footer,
+        .dark-mode div[class*="bg-white"], .dark div[class*="bg-white"],
+        .dark-mode div[class*="bg-slate-"], .dark div[class*="bg-slate-"],
+        .dark-mode div[class*="bg-indigo-"], .dark div[class*="bg-indigo-"] {
             background: #020617 !important;
+            background-color: #020617 !important;
+            border-color: rgba(255, 255, 255, 0.05) !important;
         }
 
-        /* Override bg-white specifically for dark mode */
+        /* Override specific card-like backgrounds */
         .dark-mode .bg-white, .dark .bg-white,
         .dark-mode .guide-card, .dark .guide-card,
         .dark-mode .guide-sub-card, .dark .guide-sub-card,
@@ -105,13 +111,20 @@
         .dark-mode h4, .dark h4,
         .dark-mode p, .dark p,
         .dark-mode span, .dark span,
+        .dark-mode li, .dark li,
+        .dark-mode div, .dark div,
         .dark-mode summary, .dark summary {
             color: #f8fafc !important;
         }
 
         .dark-mode .text-slate-600, .dark .text-slate-600,
-        .dark-mode .text-slate-500, .dark .text-slate-500 {
+        .dark-mode .text-slate-500, .dark .text-slate-500,
+        .dark-mode .text-[#4f46e5], .dark .text-[#4f46e5] {
             color: #94a3b8 !important;
+        }
+
+        .dark-mode i, .dark i {
+            color: #818cf8 !important;
         }
         .glass {
             background: rgba(255, 255, 255, 0.8);
