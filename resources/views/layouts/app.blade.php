@@ -421,42 +421,111 @@
                     </div>
 
                     @if(request()->is('/'))
-                    <!-- STRUKTUR ORGANISASI RW 04 FOOTER (Conditional Landing Page) -->
-                    <footer class="mt-12 py-10 px-6 sm:px-10 lg:px-12 transition-all duration-300 no-print" style="backdrop-filter: blur(15px); background: rgba(15, 23, 42, 0.7); border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                    <!-- STRUKTUR ORGANISASI RW 04 LENGKAP (3 BARIS) -->
+                    <footer class="mt-12 py-16 px-6 sm:px-10 lg:px-12 transition-all duration-300 no-print" style="backdrop-filter: blur(15px); background: rgba(15, 23, 42, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.08);">
                         <div class="max-w-7xl mx-auto">
                             <div class="text-center mb-12">
-                                <h4 class="text-sm font-black uppercase tracking-widest opacity-60 text-white">Struktur Organisasi RW 04</h4>
-                                <div class="h-1 w-20 bg-indigo-600 mx-auto mt-2 rounded-full"></div>
+                                <h4 class="text-2xl font-black uppercase tracking-widest text-white">Struktur Organisasi RW 04 Kalitanjung Timur</h4>
+                                <div class="h-1.5 w-32 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <!-- Ketua RW -->
-                                <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-white/5 border border-white/10">
-                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center mb-4 text-indigo-400">
-                                        <i class="fas fa-user-tie text-xl"></i>
+
+                            <!-- BARIS 1: PENGURUS RW -->
+                            <div class="mb-12">
+                                <h5 class="text-center text-indigo-400 font-black uppercase tracking-widest text-xs mb-8">PENGURUS INTI RW</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-indigo-500/5 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+                                        <div class="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg">
+                                            <i class="fas fa-user-tie text-3xl"></i>
+                                        </div>
+                                        <h6 class="text-xl font-black text-white">Toto S</h6>
+                                        <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Ketua RW 04</p>
                                     </div>
-                                    <h5 class="text-lg font-black text-white">Toto S</h5>
-                                    <p class="text-xs opacity-60 uppercase tracking-widest font-bold text-white/70">Ketua RW 04</p>
-                                </div>
-                                <!-- Sekretaris -->
-                                <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-white/5 border border-white/10">
-                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center mb-4 text-indigo-400">
-                                        <i class="fas fa-file-alt text-xl"></i>
+                                    <div class="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-white/5 border border-white/10">
+                                        <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mb-6 text-white">
+                                            <i class="fas fa-file-alt text-3xl"></i>
+                                        </div>
+                                        <h6 class="text-xl font-black text-white">Sekretaris RW</h6>
+                                        <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Sekretaris</p>
                                     </div>
-                                    <h5 class="text-lg font-black text-white">Sekretaris RW</h5>
-                                    <p class="text-xs opacity-60 uppercase tracking-widest font-bold text-white/70">Sekretaris</p>
-                                </div>
-                                <!-- Bendahara -->
-                                <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-white/5 border border-white/10">
-                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center mb-4 text-indigo-400">
-                                        <i class="fas fa-wallet text-xl"></i>
+                                    <div class="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-white/5 border border-white/10">
+                                        <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mb-6 text-white">
+                                            <i class="fas fa-wallet text-3xl"></i>
+                                        </div>
+                                        <h6 class="text-xl font-black text-white">Sri Mufarida</h6>
+                                        <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Bendahara RW</p>
                                     </div>
-                                    <h5 class="text-lg font-black text-white">Sri Mufarida</h5>
-                                    <p class="text-xs opacity-60 uppercase tracking-widest font-bold text-white/70">Bendahara RW</p>
                                 </div>
                             </div>
-                            <div class="mt-12 pt-8 border-t border-white/10 flex justify-between items-center text-[10px] font-bold opacity-40 text-white">
+
+                            <!-- BARIS 2: PENGURUS RT 01 -->
+                            <div class="mb-12 pt-12 border-t border-white/5">
+                                <h5 class="text-center text-slate-500 font-black uppercase tracking-widest text-xs mb-8">PENGURUS WILAYAH RT 01</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                                    <div class="flex items-center gap-6 p-6 rounded-[2rem] bg-white/5 border border-white/10">
+                                        <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400">
+                                            <i class="fas fa-user-shield text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="text-lg font-black text-white">Ketua RT 01</h6>
+                                            <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Ketua RT 01</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-6 p-6 rounded-[2rem] bg-white/5 border border-white/10">
+                                        <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400">
+                                            <i class="fas fa-coins text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="text-lg font-black text-white">Bendahara RT 01</h6>
+                                            <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Bendahara RT 01</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BARIS 3: PENGURUS RT 02 & RT 03 -->
+                            <div class="pt-12 border-t border-white/5">
+                                <h5 class="text-center text-slate-500 font-black uppercase tracking-widest text-xs mb-8">PENGURUS WILAYAH RT 02 & RT 03</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <!-- Group RT 02 -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
+                                            <i class="fas fa-user-shield text-indigo-400"></i>
+                                            <div>
+                                                <h6 class="text-base font-black text-white">Ketua RT 02</h6>
+                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">KETUA RT 02</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
+                                            <i class="fas fa-coins text-indigo-400"></i>
+                                            <div>
+                                                <h6 class="text-base font-black text-white">Bendahara RT 02</h6>
+                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">BENDAHARA RT 02</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Group RT 03 -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
+                                            <i class="fas fa-user-shield text-indigo-400"></i>
+                                            <div>
+                                                <h6 class="text-base font-black text-white">Ketua RT 03</h6>
+                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">KETUA RT 03</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-5 p-5 rounded-[1.5rem] bg-white/5 border border-white/10">
+                                            <i class="fas fa-coins text-indigo-400"></i>
+                                            <div>
+                                                <h6 class="text-base font-black text-white">Bendahara RT 03</h6>
+                                                <p class="text-[9px] opacity-40 uppercase tracking-tighter text-white">BENDAHARA RT 03</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold opacity-30 text-white gap-4">
+                                <span>STMIK IKMI CIREBON - Tim Pengembang IWK</span>
                                 <span>&copy; {{ date('Y') }} RW 04 Kalitanjung Timur</span>
-                                <span>DIGITAL-IWK04 v1.0.0</span>
                             </div>
                         </div>
                     </footer>
