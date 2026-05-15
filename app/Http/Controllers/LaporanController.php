@@ -12,42 +12,57 @@ class LaporanController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        // Sort by created_at desc to show newest inputs first
-        $query = TransaksiKas::with('category', 'warga')->orderBy('created_at', 'desc');
+        $selectedRt = $request->rt_id;
+        $selectedKuartal = $request->kuartal;
 
-        if ($user->isAdmin() && $request->filled('rt_id')) {
-            $query->where('rt_id', $request->rt_id);
-        }
-
-        $transaksis = $query->get();
-
+        // Base Query
+        $query = TransaksiKas::with('category', 'warga')->orderBy('tanggal', 'asc')->orderBy('created_at', 'asc');
         $totalMasukQuery = TransaksiKas::where('jenis_transaksi', 'Masuk');
         $totalKeluarQuery = TransaksiKas::where('jenis_transaksi', 'Keluar');
 
-        if ($user->isAdmin() && $request->filled('rt_id')) {
-            $totalMasukQuery->where('rt_id', $request->rt_id);
-            $totalKeluarQuery->where('rt_id', $request->rt_id);
+        // Filter RT
+        if ($selectedRt) {
+            $query->where('rt_id', $selectedRt);
+            $totalMasukQuery->where('rt_id', $selectedRt);
+            $totalKeluarQuery->where('rt_id', $selectedRt);
         }
 
+        // Filter Kuartal
+        if ($selectedKuartal) {
+            $year = now()->format('Y');
+            switch ($selectedKuartal) {
+                case 1: $startMonth = 1; $endMonth = 3; break;
+                case 2: $startMonth = 4; $endMonth = 6; break;
+                case 3: $startMonth = 7; $endMonth = 9; break;
+                case 4: $startMonth = 10; $endMonth = 12; break;
+                default: $startMonth = 1; $endMonth = 3; break;
+            }
+            $startDate = \Carbon\Carbon::create($year, $startMonth, 1)->startOfMonth()->format('Y-m-d');
+            $endDate = \Carbon\Carbon::create($year, $endMonth, 1)->endOfMonth()->format('Y-m-d');
+            
+            $query->whereBetween('tanggal', [$startDate, $endDate]);
+            $totalMasukQuery->whereBetween('tanggal', [$startDate, $endDate]);
+            $totalKeluarQuery->whereBetween('tanggal', [$startDate, $endDate]);
+        }
+
+        $transaksis = $query->get();
         $totalMasuk = $totalMasukQuery->sum('jumlah');
         $totalKeluar = $totalKeluarQuery->sum('jumlah');
         $saldoAkhir = $totalMasuk - $totalKeluar;
 
         $rts = \App\Models\RtUnit::all();
-        $selectedRt = $request->rt_id;
-
-        $rtIdForProfile = ($user->isAdmin() && $request->filled('rt_id')) ? $request->rt_id : $user->rt_id;
+        $rtIdForProfile = ($user->isAdmin() && $selectedRt) ? $selectedRt : $user->rt_id;
         $profil = \App\Models\ProfilRt::where('rt_id', $rtIdForProfile)->first();
         $profilRW = \App\Models\ProfilRt::whereNull('rt_id')->first();
 
-        return view('laporan.index', compact('transaksis', 'totalMasuk', 'totalKeluar', 'saldoAkhir', 'rts', 'selectedRt', 'user', 'profil', 'profilRW'));
+        return view('laporan.index', compact('transaksis', 'totalMasuk', 'totalKeluar', 'saldoAkhir', 'rts', 'selectedRt', 'selectedKuartal', 'user', 'profil', 'profilRW'));
     }
 
     public function print()
     {
         $user = Auth::user();
-        // Print also newest first as requested (baru ke lama)
-        $transaksis = TransaksiKas::with('category', 'warga')->orderBy('created_at', 'desc')->get();
+        // Print order: oldest first (lama ke baru)
+        $transaksis = TransaksiKas::with('category', 'warga')->orderBy('tanggal', 'asc')->orderBy('created_at', 'asc')->get();
         $totalMasuk = TransaksiKas::where('jenis_transaksi', 'Masuk')->sum('jumlah');
         $totalKeluar = TransaksiKas::where('jenis_transaksi', 'Keluar')->sum('jumlah');
         $saldoAkhir = $totalMasuk - $totalKeluar;
@@ -56,16 +71,32 @@ class LaporanController extends Controller
     }
 
     // Existing methods for PDF export
-    private function exportKuartal($rtId)
+    private function exportKuartal($rtId, $kuartal = null)
     {
         \Carbon\Carbon::setLocale('id');
         $now = now();
-        $startOfQuarter = $now->copy()->startOfQuarter();
-        $endOfQuarter = $now->copy()->endOfQuarter();
-        
-        $startMonth = strtoupper($startOfQuarter->translatedFormat('F'));
-        $endMonth = strtoupper($endOfQuarter->translatedFormat('F'));
         $year = $now->format('Y');
+
+        // Jika kuartal tidak dipilih, gunakan kuartal saat ini
+        if (!$kuartal) {
+            $currentMonth = (int)$now->format('m');
+            $kuartal = ceil($currentMonth / 3);
+        }
+
+        // Tentukan rentang bulan berdasarkan kuartal
+        switch ($kuartal) {
+            case 1: $startMonthNum = 1; $endMonthNum = 3; break;
+            case 2: $startMonthNum = 4; $endMonthNum = 6; break;
+            case 3: $startMonthNum = 7; $endMonthNum = 9; break;
+            case 4: $startMonthNum = 10; $endMonthNum = 12; break;
+            default: $startMonthNum = 1; $endMonthNum = 3; break;
+        }
+
+        $startOfQuarter = \Carbon\Carbon::create($year, $startMonthNum, 1, 0, 0, 0)->startOfMonth();
+        $endOfQuarter = \Carbon\Carbon::create($year, $endMonthNum, 1, 23, 59, 59)->endOfMonth();
+        
+        $startMonthName = strtoupper($startOfQuarter->translatedFormat('F'));
+        $endMonthName = strtoupper($endOfQuarter->translatedFormat('F'));
 
         // Saldo sebelum periode
         $masukSblm = TransaksiKas::when($rtId, function ($query) use ($rtId) {
@@ -84,13 +115,14 @@ class LaporanController extends Controller
             
         $saldoAwal = $masukSblm - $keluarSblm;
 
-        // Sort by created_at desc for PDF (baru ke lama)
+        // Ambil transaksi dalam rentang kuartal
         $transaksis = TransaksiKas::with(['category', 'warga'])
                         ->when($rtId, function ($query) use ($rtId) {
                             return $query->where('rt_id', $rtId);
                         })
                         ->whereBetween('tanggal', [$startOfQuarter->format('Y-m-d'), $endOfQuarter->format('Y-m-d')])
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy('tanggal', 'asc')
+                        ->orderBy('created_at', 'asc')
                         ->get();
 
         $grouped = $transaksis->groupBy(function ($item) {
@@ -103,8 +135,8 @@ class LaporanController extends Controller
         return [
             'transaksis' => $transaksis,
             'grouped' => $grouped,
-            'startMonth' => $startMonth,
-            'endMonth' => $endMonth,
+            'startMonth' => $startMonthName,
+            'endMonth' => $endMonthName,
             'year' => $year,
             'saldoAwal' => $saldoAwal,
             'profil' => $profil,
@@ -116,37 +148,32 @@ class LaporanController extends Controller
     {
         $user = Auth::user();
         $rtId = ($user->isAdmin() && $request->filled('rt_id')) ? $request->rt_id : $user->rt_id;
+        $kuartal = $request->query('kuartal');
         
-        // If Admin selects 'All' (no rt_id), handle gracefully by modifying exportKuartal
-        $data = $this->exportKuartal($rtId);
+        $data = $this->exportKuartal($rtId, $kuartal);
         $data['user'] = $user;
         $data['wilayahFilter'] = $rtId ? \App\Models\RtUnit::find($rtId)->nomor_rt : 'Semua RT';
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('laporan.a3', $data);
         $pdf->setPaper('a3', 'landscape');
         
-        $pdf->getDomPDF()->add_info('Author', 'Sekar Tanjung Maulidia');
-        $pdf->getDomPDF()->add_info('Subject', 'Laporan Keuangan IWK RW 04');
-        
-        return $pdf->download('laporan iwk per tiga bulan.pdf');
+        return $pdf->download('laporan iwk triwulan ' . ($kuartal ?? 'saat ini') . '.pdf');
     }
 
     public function cetakA4(Request $request)
     {
         $user = Auth::user();
         $rtId = ($user->isAdmin() && $request->filled('rt_id')) ? $request->rt_id : $user->rt_id;
+        $kuartal = $request->query('kuartal');
 
-        $data = $this->exportKuartal($rtId);
+        $data = $this->exportKuartal($rtId, $kuartal);
         $data['user'] = $user;
         $data['wilayahFilter'] = $rtId ? \App\Models\RtUnit::find($rtId)->nomor_rt : 'Semua RT';
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('laporan.a4', $data);
         $pdf->setPaper('a4', 'portrait');
         
-        $pdf->getDomPDF()->add_info('Author', 'Sekar Tanjung Maulidia');
-        $pdf->getDomPDF()->add_info('Subject', 'Laporan Keuangan IWK RW 04');
-        
-        return $pdf->download('laporan iwk per tiga bulan.pdf');
+        return $pdf->download('laporan iwk triwulan ' . ($kuartal ?? 'saat ini') . '.pdf');
     }
 
     public function edit(TransaksiKas $transaksi)

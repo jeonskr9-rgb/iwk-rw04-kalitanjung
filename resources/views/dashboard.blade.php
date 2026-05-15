@@ -1,14 +1,25 @@
 <x-app-layout>
-    <div class="py-12 bg-slate-950 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+    <style>
+        @media (max-width: 640px) {
+            .stat-card-title { font-size: 0.75rem !important; }
+            .stat-card-value { font-size: 1.5rem !important; }
+            .hero-title { font-size: 1.5rem !important; }
+            .hero-p { font-size: 0.85rem !important; }
+            .glass-dark { padding: 1.5rem !important; }
+            table th, table td { padding-left: 1rem !important; padding-right: 1rem !important; font-size: 0.8rem !important; }
+            .nowrap-nominal { font-size: 0.85rem !important; }
+        }
+    </style>
+    <div class="py-6 md:py-12 bg-slate-950 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
             
             <!-- HEADER HERO -->
-            <div class="relative overflow-hidden rounded-3xl p-8 glass-dark">
+            <div class="relative overflow-hidden rounded-3xl p-6 md:p-8 glass-dark">
                 <div class="relative z-10">
-                    <h2 class="text-3xl font-extrabold mb-2">
+                    <h2 class="text-2xl md:text-3xl font-extrabold mb-2 hero-title">
                         Dashboard {{ $wilayahText }}
                     </h2>
-                    <p class="text-slate-400">Selamat datang kembali, <span class="text-indigo-400 font-semibold">{{ $jabatanText }}</span>. Pantau keuangan dan iuran warga {{ $wilayahText }} secara real-time.</p>
+                    <p class="text-slate-400 text-sm md:text-base hero-p">Selamat datang kembali, <span class="text-indigo-400 font-semibold">{{ $jabatanText }}</span>. Pantau keuangan dan iuran warga {{ $wilayahText }} secara real-time.</p>
                 </div>
                 <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
                 <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl"></div>
@@ -29,8 +40,8 @@
                             <span class="text-[10px] font-bold text-emerald-400">IWK: Rp {{ number_format($incomeByIWK, 0, ',', '.') }}</span>
                         </div>
                     </div>
-                    <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">{{ $saldoTitle }}</h3>
-                    <p class="text-3xl font-bold mt-1">Rp {{ number_format($totalKas, 0, ',', '.') }}</p>
+                    <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider stat-card-title">{{ $saldoTitle }}</h3>
+                    <p class="text-3xl font-bold mt-1 stat-card-value">Rp {{ number_format($totalKas, 0, ',', '.') }}</p>
                     <div class="mt-4 pt-4 border-t border-slate-700/50 flex justify-between items-center text-[11px]">
                         <span class="text-slate-500 font-bold uppercase">Lain-lain</span>
                         <span class="text-slate-300 font-mono">Rp {{ number_format($incomeByOther, 0, ',', '.') }}</span>
@@ -47,8 +58,8 @@
                         </div>
                         <span class="text-xs font-bold text-indigo-500 bg-indigo-500/10 px-2 py-1 rounded-lg">Total</span>
                     </div>
-                    <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">{{ $wargaTitle }}</h3>
-                    <p class="text-3xl font-bold mt-1">{{ $jumlahWarga }} <span class="text-sm font-normal text-slate-500">Jiwa</span></p>
+                    <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider stat-card-title">{{ $wargaTitle }}</h3>
+                    <p class="text-3xl font-bold mt-1 stat-card-value">{{ $jumlahWarga }} <span class="text-sm font-normal text-slate-500">Jiwa</span></p>
                 </div>
 
                 <!-- Warga Menunggak -->
@@ -61,8 +72,8 @@
                         </div>
                         <span class="text-xs font-bold text-rose-500 bg-rose-500/10 px-2 py-1 rounded-lg">{{ $namaBulan }}</span>
                     </div>
-                    <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Jumlah Menunggak</h3>
-                    <p class="text-3xl font-bold mt-1">{{ $jumlahMenunggak }} <span class="text-sm font-normal text-slate-500">Keluarga</span></p>
+                    <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider stat-card-title">Jumlah Menunggak</h3>
+                    <p class="text-3xl font-bold mt-1 stat-card-value">{{ $jumlahMenunggak }} <span class="text-sm font-normal text-slate-500">Keluarga</span></p>
                 </div>
             </div>
 

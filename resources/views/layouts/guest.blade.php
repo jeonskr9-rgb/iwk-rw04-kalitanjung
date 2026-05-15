@@ -39,6 +39,12 @@
 
             h1, h2, h3, h4, h5, h6, p, span, div, a, label, input { color: var(--text-main) !important; }
             
+            body.light-mode input {
+                background-color: #f1f5f9 !important; /* Slate 100 */
+                border-color: #cbd5e1 !important; /* Slate 300 */
+                color: #0f172a !important; /* Ensure text is dark */
+            }
+            
             .card-guest {
                 background: var(--bg-card) !important;
                 border-color: var(--border-color) !important;

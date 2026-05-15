@@ -11,9 +11,9 @@ class ProfilRtController extends Controller
 {
     public function index()
     {
-        // Bypass storage:link logic on InfinityFree
-        if (!file_exists(public_path('uploads/profil'))) {
-            mkdir(public_path('uploads/profil'), 0777, true);
+        $uploadsPath = public_path('uploads/profil');
+        if (!file_exists($uploadsPath)) {
+            mkdir($uploadsPath, 0777, true);
         }
 
         $rt_id = auth()->user()->rt_id;
@@ -60,6 +60,11 @@ class ProfilRtController extends Controller
         $user->save();
 
         if ($request->hasFile('foto')) {
+            $uploadsPath = public_path('uploads/profil');
+            if (!file_exists($uploadsPath)) {
+                mkdir($uploadsPath, 0777, true);
+            }
+
             // 1. Delete old photo if exists from the correct directory
             if ($profil->foto && file_exists(public_path('uploads/profil/' . $profil->foto))) {
                 unlink(public_path('uploads/profil/' . $profil->foto));
@@ -73,10 +78,6 @@ class ProfilRtController extends Controller
             // 3. Save path to database (path is already relative like 'profile_photos/filename.jpg')
             $profil->foto = $filename;
             $profil->save();
-
-            // 4. Sinkronisasi Foto ke Tabel Users agar Navbar ikut berubah
-            $user->profile_photo_path = $filename;
-            $user->save();
         }
 
         return redirect()->back()->with('success', 'Data Profil Pengurus berhasil diperbarui!');
@@ -93,11 +94,6 @@ class ProfilRtController extends Controller
             }
             $profil->foto = null;
             $profil->save();
-
-            // Sinkronisasi ke Tabel Users
-            $user = auth()->user();
-            $user->profile_photo_path = null;
-            $user->save();
 
             return redirect()->back()->with('success', 'Foto profil berhasil dihapus!');
         }

@@ -14,7 +14,7 @@ class IuranController extends Controller
     {
         $user = Auth::user();
         
-        $query = Warga::with('kartuKeluarga');
+        $query = Warga::with('kartuKeluarga')->where('status', 'aktif');
         
         if (!$user->isAdmin()) {
             $query->where('rt_id', $user->rt_id);
@@ -22,15 +22,15 @@ class IuranController extends Controller
 
         $wargas = $query->get();
 
-        // Form A: Kategori Iuran Rutin (IWK, Andon, Sumbangan)
+        // Form A: Kategori Iuran Rutin (IWK, Andon)
         $categoriesA = Category::where('type', 'pemasukan')
-            ->whereIn('name', ['IWK (Pribumi)', 'Andon (Pendatang)', 'Sumbangan'])
+            ->whereIn('name', ['IWK (Pribumi)', 'Andon (Pendatang)'])
             ->get();
 
-        // Form B: Kategori Operasional
-        $categoriesB = Category::whereIn('name', ['Infrastruktur', 'Kebersihan', 'Sosial', 'Konsumsi', 'ATK'])
-            ->get()
-            ->unique('name');
+        // Form B: Kategori Umum & Operasional (Semua selain IWK & Andon)
+        $categoriesB = Category::where('name', 'not like', '%IWK%')
+            ->where('name', 'not like', '%Andon%')
+            ->get();
 
         $rt_units = \App\Models\RtUnit::all();
         return view('iuran.create', compact('wargas', 'categoriesA', 'categoriesB', 'rt_units'));
@@ -50,8 +50,9 @@ class IuranController extends Controller
         $user = Auth::user();
         $warga = Warga::findOrFail($request->warga_id);
         
+        $tahun = $request->input('tahun', date('Y'));
         $bulanDaftar = implode(', ', $request->bulan);
-        $uraian = $request->uraian ?: "Iuran Bulan: " . $bulanDaftar;
+        $uraian = $request->uraian ?: "Iuran Bulan: " . $bulanDaftar . " (" . $tahun . ")";
 
         TransaksiKas::create([
             'rt_id' => $user->rt_id ?? $warga->rt_id,
@@ -97,20 +98,20 @@ class IuranController extends Controller
 
         return redirect()->route('laporan.index')->with('success', 'Transaksi Operasional berhasil dicatat!');
     }
-    public function checkStatus($warga_id)
+    public function checkStatus(Request $request, $warga_id)
     {
         $warga = Warga::findOrFail($warga_id);
+        $tahun = $request->query('tahun', date('Y'));
         
-        // Ambil bulan yang sudah dibayar tahun ini
-        $tahunIni = date('Y');
+        // Ambil bulan yang sudah dibayar pada tahun terpilih
         $transaksi = TransaksiKas::where('warga_id', $warga_id)
-            ->whereYear('tanggal', $tahunIni)
+            ->whereYear('tanggal', $tahun)
             ->get();
 
         $paidMonths = [];
         foreach ($transaksi as $t) {
-            // Kita asumsikan uraian berisi "Iuran Bulan: Januari, Februari"
-            if (preg_match('/Iuran Bulan: (.*)/i', $t->uraian, $matches)) {
+            // Kita asumsikan uraian berisi "Iuran Bulan: Januari, Februari (2026)"
+            if (preg_match('/Iuran Bulan: (.*?)(?:\s*\(.*\))?$/i', $t->uraian, $matches)) {
                 $bulanString = $matches[1];
                 $bulanArray = explode(', ', $bulanString);
                 foreach ($bulanArray as $b) {

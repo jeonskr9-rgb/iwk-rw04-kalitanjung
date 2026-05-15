@@ -11,9 +11,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?v=1.5" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js?v=1.5"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js?v=1.5"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?v={{ time() }}" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js?v={{ time() }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js?v={{ time() }}"></script>
 
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
@@ -47,19 +47,19 @@
             }
 
             body.light-mode {
-                --bg-body: #f0f9ff;
-                --text-main: #082f49;
-                --text-muted: #0369a1;
-                --bg-sidebar: #e0f2fe;
+                --bg-body: #f1f5f9;
+                --text-main: #1e293b;
+                --text-muted: #64748b;
+                --bg-sidebar: #f8fafc;
                 --bg-card: #ffffff;
                 --bg-input: #ffffff;
-                --text-input: #082f49;
-                --text-label: #082f49;
-                --border-color: #bae6fd;
-                --border-input: #7dd3fc;
-                --shadow-card: 0 10px 30px -10px rgba(7, 89, 133, 0.1);
-                --glass-bg: rgba(255, 255, 255, 0.9);
-                --hover-bg: #e0f2fe;
+                --text-input: #1e293b;
+                --text-label: #334155;
+                --border-color: #e2e8f0;
+                --border-input: #cbd5e1;
+                --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+                --glass-bg: rgba(248, 250, 252, 0.95);
+                --hover-bg: #e2e8f0;
             }
 
             body { 
@@ -133,6 +133,12 @@
                 border: 1px solid var(--border-input) !important;
             }
 
+            /* Fix visibility for Light Mode inputs */
+            body.light-mode input, body.light-mode select, body.light-mode textarea {
+                color: #1e293b !important;
+                background-color: #ffffff !important;
+            }
+
             input::placeholder, textarea::placeholder {
                 color: var(--text-muted) !important;
                 opacity: 0.7;
@@ -141,6 +147,11 @@
             select option { 
                 background-color: var(--bg-card) !important; 
                 color: var(--text-input) !important; 
+            }
+            
+            body.light-mode select option {
+                background-color: #ffffff !important;
+                color: #1e293b !important;
             }
 
             .bg-indigo-600 {
@@ -396,8 +407,9 @@
                         </div>
                         <div class="flex-shrink-0">
                             @php
-                                $finalSrc = Auth::user()->profile_photo_path 
-                                    ? asset('uploads/profil/' . Auth::user()->profile_photo_path) . '?v=' . time()
+                                $userPhoto = Auth::user()->profile_photo_path;
+                                $finalSrc = $userPhoto 
+                                    ? route('storage.file', ['path' => $userPhoto]) . '?v=' . time()
                                     : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=4f46e5&color=fff&bold=true';
                             @endphp
                             <img src="{{ $finalSrc }}" 
@@ -462,7 +474,7 @@
                                         <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mb-6 text-white">
                                             <i class="fas fa-file-alt text-3xl"></i>
                                         </div>
-                                        <h6 class="text-xl font-black text-white">Sekretaris RW</h6>
+                                        <h6 class="text-xl font-black text-white">Benyamin Ahmad</h6>
                                         <p class="text-[10px] opacity-60 uppercase tracking-widest font-bold text-white/70">Sekretaris</p>
                                     </div>
                                     <div class="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-white/5 border border-white/10">
@@ -696,6 +708,11 @@
                     overlay.classList.add('hidden');
                 }
             }
+
+            // ANTI-SESSION EXPIRED: Keep alive every 5 minutes
+            setInterval(function() {
+                fetch('/ping').catch(e => console.log('Ping failed'));
+            }, 300000); 
         </script>
 </body>
 </html>

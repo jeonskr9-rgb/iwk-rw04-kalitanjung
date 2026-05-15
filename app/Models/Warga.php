@@ -18,8 +18,10 @@ class Warga extends Model
         'nik',
         'no_kk',
         'nama_warga',
-        'status',
+        'jenis_warga', // Pengganti kolom status lama (Pribumi/Pendatang)
+        'status',      // Kolom status baru (aktif, pindah, tidak_aktif)
         'tgl_masuk_warga',
+        'tgl_keluar_warga',
         'no_telp',
         'is_active',
         'last_edited_by',
@@ -46,7 +48,8 @@ class Warga extends Model
     
     protected $casts = [
         'is_active' => 'boolean',
-        'tgl_masuk_warga' => 'date'
+        'tgl_masuk_warga' => 'date',
+        'tgl_keluar_warga' => 'date'
     ];
 
     public function kartuKeluarga() {
@@ -66,7 +69,7 @@ class Warga extends Model
      */
     public function getNominalIuranAttribute(): int
     {
-        return $this->status === 'Pendatang' ? 5000 : 3000;
+        return $this->jenis_warga === 'Pendatang' ? 5000 : 3000;
     }
 
     /**
@@ -74,7 +77,7 @@ class Warga extends Model
      */
     public function getJenisIuranAttribute(): string
     {
-        return $this->status === 'Pendatang' ? 'Andon' : 'IWK';
+        return $this->jenis_warga === 'Pendatang' ? 'Andon' : 'IWK';
     }
 
     /**
@@ -84,9 +87,18 @@ class Warga extends Model
     {
         // Asumsi hitungan dimulai dari Januari 2026 atau tanggal masuk
         $startDate = $this->tgl_masuk_warga ? $this->tgl_masuk_warga->startOfMonth() : \Carbon\Carbon::create(2026, 1, 1);
-        $now = now()->startOfMonth();
         
-        $monthsToPay = $startDate->diffInMonths($now) + 1;
+        // Jika warga sudah pindah/tidak aktif, gunakan tanggal keluar sebagai batas hitungan
+        $endDate = ($this->status !== 'aktif' && $this->tgl_keluar_warga) 
+            ? $this->tgl_keluar_warga->startOfMonth() 
+            : now()->startOfMonth();
+            
+        // Jika warga pindah sebelum sistem mulai (Jan 2026), tunggakan 0
+        if ($endDate->lt($startDate)) {
+            return 0;
+        }
+        
+        $monthsToPay = $startDate->diffInMonths($endDate) + 1;
         $totalObligation = $monthsToPay * $this->nominal_iuran;
         
         $totalPaid = $this->transaksiKas()

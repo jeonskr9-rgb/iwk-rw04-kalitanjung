@@ -98,12 +98,10 @@ class User extends Authenticatable
      * Get the user's profile photo path.
      * Menggunakan data dari database jika ada.
      */
-    /*
     public function getProfilePhotoPathAttribute()
     {
         $rt_id = $this->rt_id;
         $profil = \App\Models\ProfilRt::where('rt_id', $rt_id)->first();
         return $profil ? $profil->foto : null;
     }
-    */
 }

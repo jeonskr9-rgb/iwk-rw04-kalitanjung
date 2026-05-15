@@ -5,23 +5,32 @@
             <!-- Header & Actions -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 class="text-3xl font-black tracking-tight">Laporan Keuangan</h1>
-                    <p class="text-slate-400 mt-1 font-medium">Rekapitulasi pemasukan dan pengeluaran kas RT.</p>
+                    <h1 class="text-3xl font-black tracking-tight text-white">Laporan Keuangan</h1>
+                    <p class="text-slate-400 mt-1 font-medium">Rekapitulasi kas tahun {{ now()->year }}.</p>
                 </div>
                 
-                @if($user->isAdmin())
-                <form method="GET" action="{{ route('laporan.index') }}" class="flex items-center space-x-3 bg-white/5 p-2 rounded-2xl border border-white/10 backdrop-blur-md">
+                <form method="GET" action="{{ route('laporan.index') }}" class="flex flex-wrap items-center gap-3 bg-white/5 p-3 rounded-3xl border border-white/10 backdrop-blur-md">
+                    @if($user->isAdmin())
                     <select name="rt_id" class="bg-slate-800 text-slate-200 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500 transition shadow-inner">
                         <option value="">Semua RT</option>
                         @foreach($rts as $rt)
                             <option value="{{ $rt->id }}" {{ $selectedRt == $rt->id ? 'selected' : '' }}>RT {{ $rt->nomor_rt }}</option>
                         @endforeach
                     </select>
-                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-xl transition shadow-lg shadow-indigo-500/30">
-                        Filter
+                    @endif
+                    
+                    <select name="kuartal" class="bg-slate-800 text-slate-200 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:ring-indigo-500 focus:border-indigo-500 transition shadow-inner">
+                        <option value="">Pilih Triwulan</option>
+                        <option value="1" {{ $selectedKuartal == 1 ? 'selected' : '' }}>Januari - Maret</option>
+                        <option value="2" {{ $selectedKuartal == 2 ? 'selected' : '' }}>April - Juni</option>
+                        <option value="3" {{ $selectedKuartal == 3 ? 'selected' : '' }}>Juli - September</option>
+                        <option value="4" {{ $selectedKuartal == 4 ? 'selected' : '' }}>Oktober - Desember</option>
+                    </select>
+
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-xl transition shadow-lg shadow-indigo-500/30 active:scale-95">
+                        Terapkan Filter
                     </button>
                 </form>
-                @endif
             </div>
 
             <!-- Summary Widgets -->
@@ -56,13 +65,12 @@
                         Rincian Transaksi
                     </h2>
                     <div class="flex flex-row flex-wrap justify-end gap-3">
-                        @php $printQuery = $selectedRt ? '?rt_id='.$selectedRt : ''; @endphp
-                        <a href="{{ route('laporan.a4') . $printQuery }}" target="_blank" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-xl transition shadow-lg shadow-indigo-500/30 flex items-center gap-2 border border-white/10 backdrop-blur-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                            </svg>
-                            Print Laporan
-                        </a>
+                        @php 
+                            $printParams = [];
+                            if($selectedRt) $printParams['rt_id'] = $selectedRt;
+                            if($selectedKuartal) $printParams['kuartal'] = $selectedKuartal;
+                            $printQuery = count($printParams) > 0 ? '?' . http_build_query($printParams) : '';
+                        @endphp
                         <a href="{{ route('laporan.a3') . $printQuery }}" target="_blank" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-xl transition shadow-lg shadow-indigo-500/30 flex items-center gap-2 border border-white/10 backdrop-blur-md">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />

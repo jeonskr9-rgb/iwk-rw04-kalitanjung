@@ -2,14 +2,80 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
-// FORCE CACHE PURGE (Temporary)
-Artisan::call('view:clear');
+\Illuminate\Support\Facades\Artisan::call('view:clear');
+
+// --- RUTE HALAMAN BARU TENTANG KAMI ---
+Route::get('/tentang-kami', function () {
+    return view('tentang_kami'); 
+})->name('tentang.kami');
+// --------------------------------------
+
+Route::get('/force-migrate', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return "Migration Success: " . \Illuminate\Support\Facades\Artisan::output();
+    } catch (\Exception $e) {
+        return "Migration Error: " . $e->getMessage();
+    }
+});
+
+    // FITUR RESET DATA (Gunakan dengan hati-hati!)
+    Route::get('/reset-laporan', function() {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        \App\Models\TransaksiKas::truncate();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        return "SUKSES: Semua riwayat iuran/laporan telah dikosongkan. Data warga tetap aman.";
+    });
+
+    Route::get('/reset-total', function() {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        \App\Models\TransaksiKas::truncate();
+        \App\Models\Warga::truncate();
+        \App\Models\KartuKeluarga::truncate();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        return "SUKSES: Seluruh data (Warga, KK, dan Laporan) telah dikosongkan total.";
+    });
+
+Route::get('/fix-db', function() {
+    try {
+        // Coba cara standar
+        Schema::table('wargas', function ($table) {
+            $table->string('status', 50)->nullable()->change();
+            $table->string('jenis_warga', 50)->nullable()->change();
+        });
+    } catch (\Exception $e) {
+        // Cara paksa untuk InfinityFree
+        try {
+            \DB::statement("ALTER TABLE wargas MODIFY status VARCHAR(50) NULL");
+            \DB::statement("ALTER TABLE wargas MODIFY jenis_warga VARCHAR(50) NULL");
+            \DB::statement("ALTER TABLE wargas MODIFY nik VARCHAR(20) NULL");
+            \DB::statement("ALTER TABLE wargas MODIFY no_kk VARCHAR(50) NULL");
+            \DB::statement("ALTER TABLE wargas MODIFY kk_id BIGINT UNSIGNED NULL");
+        } catch (\Exception $ex) {
+            return "Error: " . $ex->getMessage();
+        }
+    }
+    
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    return "Database & Cache Fixed! Silakan coba simpan data lagi.";
+});
+
+Route::get('/check-db', function() {
+    $columns = Schema::getColumnListing('wargas');
+    return "Columns in 'wargas' table: " . implode(', ', $columns);
+});
+
+// HARD RESET: BRUTAL VIEW CLEAR (On Every Page Load)
+if (!app()->runningInConsole()) {
+    array_map('unlink', glob(storage_path('framework/views/*.php')));
+}
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/ping', function() { return response()->json(['status' => 'ok']); });
 
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -72,8 +138,8 @@ Route::get('/fix-passwords', function () {
     \App\Models\User::query()->update(['password' => \Illuminate\Support\Facades\Hash::make('password123')]);
     return 'Passwords updated to password123';
 });
+
 Route::get('/force-fix', function () {
-    // 1. Identifikasi & Perbaiki Pimpinan RW (Asrimawati)
     $asrimawati = \App\Models\User::where('email', 'adminrw@mail.com')->first();
     if ($asrimawati) {
         $asrimawati->update([
@@ -84,13 +150,11 @@ Route::get('/force-fix', function () {
         ]);
     }
 
-    // 2. Perbaiki Petugas RT lainnya
     $users = \App\Models\User::all();
     foreach ($users as $u) {
         if ($u->email == 'adminrw@mail.com') continue;
 
         $u->role = 'RT';
-        // Tentukan nomor RT dari email (misal rt01@mail.com -> 01)
         if (preg_match('/rt(\d+)/i', $u->email, $matches)) {
             $nomor = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
             $rtUnit = \App\Models\RtUnit::where('nomor_rt', $nomor)->first();
@@ -117,6 +181,17 @@ Route::get('/debug-profiles', function () {
     return \App\Models\ProfilRt::all();
 });
 
+Route::get('/debug-db', function() {
+    return [
+        'database' => \DB::getDatabaseName(),
+        'connection' => config('database.default'),
+        'categories_count' => \DB::table('categories')->count(),
+        'has_sessions_table' => \Schema::hasTable('sessions'),
+        'session_driver' => config('session.driver'),
+        'session_lifetime' => config('session.lifetime'),
+    ];
+});
+
 Route::get('/debug-all-users', function () {
     return [
         'rt_units_count' => \App\Models\RtUnit::count(),
@@ -125,33 +200,27 @@ Route::get('/debug-all-users', function () {
     ];
 });
 
-Route::get('/iuran/check-status/{warga_id}', [\App\Http\Controllers\IuranController::class, 'checkStatus'])->name('iuran.check-status');
 
-Route::get('/fix-db', function () {
+
+Route::get('/fix-categories', function() {
     try {
-        // 1. Tambah kolom unit_rt jika belum ada
-        if (!\Illuminate\Support\Facades\Schema::hasColumn('users', 'unit_rt')) {
-            \Illuminate\Support\Facades\Schema::table('users', function ($table) {
-                $table->string('unit_rt')->nullable()->after('role');
-            });
-        }
+        \App\Models\Category::firstOrCreate(['name' => 'Sisa Uang'], ['type' => 'pemasukan']);
+        \App\Models\Category::firstOrCreate(['name' => 'Kebersihan'], ['type' => 'pemasukan']);
+        \App\Models\Category::firstOrCreate(['name' => 'Insentif Petugas'], ['type' => 'pengeluaran']);
+        \App\Models\Category::firstOrCreate(['name' => 'Setoran ke RW'], ['type' => 'pengeluaran']);
         
-        // 2. Tambah kolom profile_photo_path jika belum ada
-        if (!\Illuminate\Support\Facades\Schema::hasColumn('users', 'profile_photo_path')) {
-            \Illuminate\Support\Facades\Schema::table('users', function ($table) {
-                $table->string('profile_photo_path')->nullable()->after('email');
-            });
-        }
-        
-        // 3. Ubah tipe data role & unit_rt agar lebih panjang (Fix Data Truncated)
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE users MODIFY COLUMN role VARCHAR(20)");
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE users MODIFY COLUMN unit_rt VARCHAR(20) NULL");
-        
-        return "DATABASE FIXED: Kolom diperluas, unit_rt dan profile_photo siap! Silakan buka Dashboard.";
+        \App\Models\RtUnit::firstOrCreate(['nomor_rt' => 'RW'], [
+            'nama_ketua' => 'Ketua RW 04',
+            'nama_bendahara' => 'Bendahara RW 04'
+        ]);
+
+        return "Data Berhasil Diperbarui! Unit 'PENGURUS RW' dan Kategori baru sudah siap.";
     } catch (\Exception $e) {
-        return "Gagal fix DB: " . $e->getMessage();
+        return "Error: " . $e->getMessage();
     }
 });
+
+Route::get('/iuran/check-status/{warga_id}', [\App\Http\Controllers\IuranController::class, 'checkStatus'])->name('iuran.check-status');
 
 Route::get('/clear-cache', function() {
     \Illuminate\Support\Facades\Artisan::call('view:clear');
@@ -162,15 +231,20 @@ Route::get('/clear-cache', function() {
 });
 
 Route::get('/storage-file/{path}', function ($path) {
+    // 1. Cek di storage internal
     $fullPath = storage_path('app/public/' . $path);
+    
+    // 2. Jika tidak ada, cek di public uploads (untuk InfinityFree compatibility)
     if (!file_exists($fullPath)) {
-        return response()->json(['error' => 'File not found at ' . $fullPath], 404);
+        $filename = basename($path);
+        $fullPath = public_path('uploads/profil/' . $filename);
     }
-    
-    $file = file_get_contents($fullPath);
-    $type = mime_content_type($fullPath);
-    
-    return response($file)->header('Content-Type', $type);
+
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+
+    return response()->file($fullPath);
 })->where('path', '.*')->name('storage.file');
 
 require __DIR__.'/auth.php';

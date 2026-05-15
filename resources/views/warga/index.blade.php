@@ -1,17 +1,42 @@
 <x-app-layout>
-    <div class="py-12 bg-slate-950 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+    <style>
+        @media (max-width: 768px) {
+            .table-font-small { font-size: 0.8rem !important; }
+            .badge-nowrap { white-space: nowrap !important; display: inline-flex !important; align-items: center; }
+            .warga-name { font-size: 0.85rem !important; }
+            .glass-dark { padding: 1.5rem !important; }
+            .header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem; }
+            .btn-mobile-wide { width: 100% !important; justify-content: center; }
+        }
+        .badge-status {
+            white-space: nowrap !important;
+            padding: 0.4rem 0.75rem !important;
+            border-radius: 0.75rem !important;
+            font-size: 0.65rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+    <div class="py-6 md:py-12 bg-slate-950 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
             
             <!-- HEADER -->
-            <div class="relative overflow-hidden rounded-3xl p-8 glass-dark">
-                <div class="relative z-10 flex justify-between items-center">
+            <div class="relative overflow-hidden rounded-3xl p-6 md:p-8 glass-dark">
+                <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h2 class="text-3xl font-extrabold mb-2 tracking-tight">
+                        <h2 class="text-2xl md:text-3xl font-extrabold mb-2 tracking-tight">
                             Data Warga RT {{ Auth::user()->rt_id }}
                         </h2>
-                        <p class="text-slate-400">Kelola informasi kependudukan dan status iuran warga secara real-time.</p>
+                        <p class="text-slate-400 text-sm md:text-base">Kelola informasi kependudukan dan status iuran warga secara real-time.</p>
                     </div>
-                    <a href="{{ route('warga.create') }}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition shadow-lg shadow-indigo-500/20 glow-indigo flex items-center">
+                    @if(session('error'))
+                        <div class="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-4 py-2 rounded-xl flex items-center text-xs animate-pulse">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <a href="{{ route('warga.create') }}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition shadow-lg shadow-indigo-500/20 glow-indigo flex items-center btn-mobile-wide">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
@@ -21,23 +46,33 @@
                 <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
             </div>
 
+            <!-- SEARCH BAR -->
+            <div class="glass-dark rounded-3xl p-2 border border-white/5 shadow-sm">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-slate-500"></i>
+                    </div>
+                    <input type="text" id="wargaSearch" placeholder="Cari nama warga..." class="block w-full pl-11 pr-4 py-3 bg-transparent border-none focus:ring-0 text-white placeholder-slate-500 font-bold">
+                </div>
+            </div>
+
             <!-- TABLE -->
             <div class="glass-dark rounded-3xl overflow-hidden shadow-2xl border border-white/5">
-                <div class="overflow-x-auto">
+                <div class="table-responsive" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch; display: block; width: 100%;">
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-indigo-600/20 border-b border-indigo-500/20">
                                 <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest">Warga</th>
-                                <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest">Identitas (NIK/KK)</th>
-                                <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest text-center">Status</th>
+                                <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest text-center" style="min-width: 130px !important;">Jenis Warga</th>
+                                <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest text-center" style="min-width: 100px !important;">Status</th>
                                 <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest text-center">Jenis Iuran</th>
                                 <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest text-center">Kontak</th>
                                 <th class="py-5 px-8 font-black text-xs text-indigo-300 uppercase tracking-widest text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-700/30">
+                        <tbody class="divide-y divide-slate-700/30 table-font-small">
                             @forelse($wargas as $w)
-                                <tr class="hover:bg-white/5 transition group">
+                                <tr class="hover:bg-white/5 transition group warga-row" data-name="{{ $w->nama_warga }}">
                                     <td class="py-6 px-8">
                                         <div class="flex items-center">
                                             <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center mr-4 border border-slate-700">
@@ -45,19 +80,28 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                 </svg>
                                             </div>
-                                            <span class="font-bold tracking-wide">{{ $w->nama_warga }}</span>
+                                            <span class="font-bold tracking-wide warga-name text-truncate" style="max-width: 140px; display: inline-block;">{{ $w->nama_warga }}</span>
                                         </div>
                                     </td>
-                                    <td class="py-6 px-8">
-                                        <div class="flex flex-col">
-                                            <span class="text-xs text-slate-500 font-bold uppercase tracking-tighter">NIK: {{ $w->nik }}</span>
-                                            <span class="text-xs text-slate-400 mt-1 font-medium">KK: {{ $w->no_kk ?: $w->kartuKeluarga->no_kk }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-6 px-8 text-center">
-                                        <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $w->status == 'Pribumi' ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' }}">
-                                            {{ $w->status }}
+                                    <td class="py-6 px-8 text-center" style="min-width: 130px !important;">
+                                        <span class="badge-status fw-bold text-white {{ ($w->jenis_warga ?? 'Pribumi') == 'Pribumi' ? 'bg-indigo-600 border border-indigo-400' : 'bg-emerald-600 border border-emerald-400' }}">
+                                            {{ $w->jenis_warga ?? 'Pribumi' }}
                                         </span>
+                                    </td>
+                                    <td class="py-6 px-8 text-center" style="min-width: 100px !important;">
+                                        @if($w->status == 'aktif')
+                                            <span class="badge bg-success badge-status" style="white-space: nowrap !important;">
+                                                <i class="fas fa-check-circle mr-1"></i> Aktif
+                                            </span>
+                                        @elseif($w->status == 'pindah')
+                                            <span class="badge bg-warning text-dark badge-status" style="white-space: nowrap !important;">
+                                                <i class="fas fa-truck mr-1"></i> Pindah
+                                            </span>
+                                        @else
+                                            <span class="badge bg-danger badge-status" style="white-space: nowrap !important;">
+                                                <i class="fas fa-times-circle mr-1"></i> Tidak Aktif
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="py-6 px-8 text-center">
                                         <div class="flex items-center justify-center space-x-2">
@@ -127,4 +171,19 @@
 
         </div>
     </div>
+    <script>
+        document.getElementById('wargaSearch').addEventListener('keyup', function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll('.warga-row');
+            
+            rows.forEach(row => {
+                let name = row.getAttribute('data-name').toLowerCase();
+                if (name.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </x-app-layout>

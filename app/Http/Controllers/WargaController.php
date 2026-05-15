@@ -27,10 +27,9 @@ class WargaController extends Controller
 
         $rules = [
             'nama_warga' => 'required|string|max:255',
-            'nik' => 'required|string|unique:wargas,nik',
-            'no_kk' => 'required|string',
             'no_telp' => 'nullable|string',
-            'status' => 'required|in:Pribumi,Pendatang',
+            'jenis_warga' => 'required|in:Pribumi,Pendatang',
+            'status' => 'required|in:aktif,pindah,tidak_aktif',
         ];
 
         // Jika user adalah admin (RW), mereka harus memilih RT
@@ -39,7 +38,6 @@ class WargaController extends Controller
         }
 
         $request->validate($rules, [
-            'nik.unique' => 'NIK ini sudah terdaftar di sistem, silakan cek kembali.',
             'rt_id.required' => 'Silakan pilih RT terlebih dahulu.'
         ]);
 
@@ -49,17 +47,41 @@ class WargaController extends Controller
             return redirect()->back()->withErrors(['rt_id' => 'Data RT tidak ditemukan. Silakan hubungi admin.'])->withInput();
         }
 
-        // Cari atau buat KK
-        $kk = KartuKeluarga::firstOrCreate(
-            ['no_kk' => $request->no_kk, 'rt_id' => $rt_id],
-            ['nama_kepala_keluarga' => $request->nama_warga]
-        );
+        // Cari atau buat KK jika no_kk diisi, jika tidak gunakan KK default per RT
+        if ($request->filled('no_kk')) {
+            $kk = KartuKeluarga::firstOrCreate(
+                ['no_kk' => $request->no_kk],
+                ['nama_kepala_keluarga' => $request->nama_warga, 'rt_id' => $rt_id]
+            );
+            $kk_id = $kk->id;
+        } else {
+            // Gunakan KK dummy unik per RT agar tidak bentrok
+            $dummyNoKk = '-RT' . str_pad($rt_id, 2, '0', STR_PAD_LEFT);
+            $kk = KartuKeluarga::firstOrCreate(
+                ['no_kk' => $dummyNoKk],
+                ['nama_kepala_keluarga' => 'Warga Tanpa KK', 'rt_id' => $rt_id]
+            );
+            $kk_id = $kk->id;
+        }
 
         // Data warga
-        $data = $request->all();
-        $data['kk_id'] = $kk->id;
+        $data = $request->only(['nama_warga', 'no_telp', 'jenis_warga', 'status']);
+        
+        // Buat ID unik otomatis yang pendek agar muat di database (Max 16 karakter)
+        $uniqueId = substr(time(), -7) . rand(100, 999);
+        $data['nik'] = 'N' . $uniqueId;
+        $data['no_kk'] = 'K' . $uniqueId;
+        
+        $data['kk_id'] = $kk_id;
         $data['rt_id'] = $rt_id;
-        $data['is_active'] = true;
+        $data['status'] = strtolower($request->status);
+        $data['jenis_warga'] = $request->jenis_warga ?: 'Pribumi'; // Default jika kosong
+        $data['is_active'] = $data['status'] === 'aktif';
+        $data['tgl_masuk_warga'] = $request->tgl_masuk_warga; // Boleh NULL, nanti di model default ke Jan 2026
+        
+        if ($data['status'] !== 'aktif') {
+            $data['tgl_keluar_warga'] = now();
+        }
 
         Warga::create($data);
 
@@ -76,21 +98,53 @@ class WargaController extends Controller
     {
         $request->validate([
             'nama_warga' => 'required|string|max:255',
-            'nik' => 'required|string|unique:wargas,nik,' . $warga->id,
-            'no_kk' => 'required|string',
             'no_telp' => 'nullable|string',
-            'status' => 'required|in:Pribumi,Pendatang',
-        ], [
-            'nik.unique' => 'NIK ini sudah terdaftar di sistem, silakan cek kembali.'
+            'jenis_warga' => 'required|in:Pribumi,Pendatang',
+            'status' => 'required|in:aktif,pindah,tidak_aktif',
         ]);
 
-        $warga->update($request->all());
+        // Simpan data dasar
+        $data = $request->only([
+            'nama_warga', 'no_telp', 'jenis_warga', 'status'
+        ]);
+        
+        // Tetap gunakan data lama atau buatkan ID unik pendek jika kosong
+        $uniqueId = substr(time(), -7) . rand(100, 999);
+        $data['nik'] = $warga->nik ?: 'N' . $uniqueId;
+        $data['no_kk'] = $warga->no_kk ?: 'K' . $uniqueId;
+        $data['status'] = strtolower($request->status);
+        $data['is_active'] = $data['status'] === 'aktif';
+        $data['tgl_masuk_warga'] = $request->tgl_masuk_warga; // Boleh NULL
+        
+        if ($request->filled('no_kk')) {
+            $kk = KartuKeluarga::firstOrCreate(
+                ['no_kk' => $request->no_kk],
+                ['nama_kepala_keluarga' => $request->nama_warga, 'rt_id' => $warga->rt_id]
+            );
+            $data['kk_id'] = $kk->id;
+        } else if (!$warga->kk_id) {
+            $dummyNoKk = '-RT' . str_pad($warga->rt_id, 2, '0', STR_PAD_LEFT);
+            $kk = KartuKeluarga::firstOrCreate(
+                ['no_kk' => $dummyNoKk],
+                ['nama_kepala_keluarga' => 'Warga Tanpa KK', 'rt_id' => $warga->rt_id]
+            );
+            $data['kk_id'] = $kk->id;
+        }
+
+        $warga->update($data);
 
         return redirect()->route('warga.index')->with('status', 'Data warga berhasil diperbarui!');
     }
 
     public function destroy(Warga $warga)
     {
+        // Cek apakah warga memiliki riwayat transaksi
+        $transactionCount = $warga->transaksiKas()->count();
+
+        if ($transactionCount > 0) {
+            return redirect()->back()->with('error', "Gagal menghapus! Warga ini memiliki $transactionCount riwayat transaksi. Silakan ubah status menjadi 'Pindah' atau 'Tidak Aktif' sebagai gantinya.");
+        }
+
         $warga->delete();
         return redirect()->route('warga.index')->with('status', 'Data warga berhasil dihapus!');
     }

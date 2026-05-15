@@ -47,16 +47,7 @@
                             <input type="text" name="nama_warga" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <x-input-label for="nik" value="NIK (16 Digit)" class="text-slate-400 font-bold mb-1" />
-                                <input type="text" name="nik" maxlength="16" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
-                            </div>
-                            <div>
-                                <x-input-label for="no_kk" value="Nomor KK (16 Digit)" class="text-slate-400 font-bold mb-1" />
-                                <input type="text" name="no_kk" maxlength="16" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
-                            </div>
-                        </div>
+
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -64,10 +55,26 @@
                                 <input type="text" name="no_telp" placeholder="Contoh: 08123456789" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all">
                             </div>
                             <div>
-                                <x-input-label for="status" value="Status Warga" class="text-slate-400 font-bold mb-1" />
-                                <select name="status" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
+                                <x-input-label for="tgl_masuk_warga" value="Mulai Terdaftar/Pindah (Opsional)" class="text-slate-400 font-bold mb-1" />
+                                <input type="date" name="tgl_masuk_warga" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all">
+                                <p class="text-[10px] text-slate-500 mt-1">* Kosongkan jika warga sudah lama tinggal (Hitung dari Jan 2026).</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <x-input-label for="jenis_warga" value="Jenis Warga" class="text-slate-400 font-bold mb-1" />
+                                <select name="jenis_warga" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
                                     <option value="Pribumi">Pribumi (Rp 3.000)</option>
                                     <option value="Pendatang">Pendatang (Rp 5.000)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <x-input-label for="status" value="Status Keanggotaan" class="text-slate-400 font-bold mb-1" />
+                                <select name="status" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="pindah">Pindah</option>
+                                    <option value="tidak_aktif">Tidak Aktif</option>
                                 </select>
                             </div>
                         </div>

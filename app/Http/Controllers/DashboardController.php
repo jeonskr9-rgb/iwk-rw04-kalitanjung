@@ -67,12 +67,13 @@ class DashboardController extends Controller
             ->whereYear('tanggal', $currentYear)
             ->sum('jumlah');
 
-        // 3. Logika Menghitung Tunggakan (Latest First)
-        $wargas = Warga::with('rtUnit')->whereHas('kartuKeluarga', function($q) use ($rtId) {
-            if ($rtId) {
-                $q->where('rt_id', $rtId);
-            }
-        })->latest()->get();
+        // 3. Logika Menghitung Tunggakan (Hanya warga aktif)
+        $wargas = Warga::with('rtUnit')->where('status', 'aktif')
+            ->whereHas('kartuKeluarga', function($q) use ($rtId) {
+                if ($rtId) {
+                    $q->where('rt_id', $rtId);
+                }
+            })->latest()->get();
 
         $tunggakanWarga = [];
         $allMonthsNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
@@ -81,16 +82,8 @@ class DashboardController extends Controller
             $jumlahBulanMenunggak = 0;
             $bulanMenunggakList = [];
 
-            // Tentukan tarif berdasarkan jenis iuran
-            $tarif = 0;
-            if (stripos($w->jenis_iuran, 'IWK') !== false) {
-                $tarif = 3000;
-            } elseif (stripos($w->jenis_iuran, 'Andon') !== false) {
-                $tarif = 5000;
-            } else {
-                // Default fallback jika tidak cocok
-                $tarif = ($w->status_warga == 'Pribumi') ? 3000 : 5000;
-            }
+            // Tentukan tarif menggunakan helper model
+            $tarif = $w->nominal_iuran;
 
             // Cek setiap bulan dari Januari (1) sampai bulan sekarang
             for ($m = 1; $m <= $currentMonth; $m++) {

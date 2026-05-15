@@ -23,16 +23,7 @@
                             <input type="text" name="nama_warga" value="{{ $warga->nama_warga }}" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <x-input-label for="nik" value="NIK (16 Digit)" class="text-slate-400 font-bold mb-1" />
-                                <input type="text" name="nik" value="{{ $warga->nik }}" maxlength="16" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
-                            </div>
-                            <div>
-                                <x-input-label for="no_kk" value="Nomor KK (16 Digit)" class="text-slate-400 font-bold mb-1" />
-                                <input type="text" name="no_kk" value="{{ $warga->no_kk }}" maxlength="16" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
-                            </div>
-                        </div>
+
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -40,10 +31,26 @@
                                 <input type="text" name="no_telp" value="{{ $warga->no_telp }}" placeholder="Contoh: 08123456789" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all">
                             </div>
                             <div>
-                                <x-input-label for="status" value="Status Warga" class="text-slate-400 font-bold mb-1" />
+                                <x-input-label for="tgl_masuk_warga" value="Mulai Terdaftar/Pindah" class="text-slate-400 font-bold mb-1" />
+                                <input type="date" name="tgl_masuk_warga" value="{{ $warga->tgl_masuk_warga ? $warga->tgl_masuk_warga->format('Y-m-d') : date('Y-m-d') }}" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all">
+                                <p class="text-[10px] text-slate-500 mt-1">* Berguna untuk menentukan mulai kapan tagihan iuran dihitung.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <x-input-label for="jenis_warga" value="Jenis Warga" class="text-slate-400 font-bold mb-1" />
+                                <select name="jenis_warga" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
+                                    <option value="Pribumi" {{ $warga->jenis_warga == 'Pribumi' ? 'selected' : '' }}>Pribumi (Rp 3.000)</option>
+                                    <option value="Pendatang" {{ $warga->jenis_warga == 'Pendatang' ? 'selected' : '' }}>Pendatang (Rp 5.000)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <x-input-label for="status" value="Status Keanggotaan" class="text-slate-400 font-bold mb-1" />
                                 <select name="status" class="mt-1 block w-full rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 py-3 px-4 transition-all" required>
-                                    <option value="Pribumi" {{ $warga->status == 'Pribumi' ? 'selected' : '' }}>Pribumi (Rp 3.000)</option>
-                                    <option value="Pendatang" {{ $warga->status == 'Pendatang' ? 'selected' : '' }}>Pendatang (Rp 5.000)</option>
+                                    <option value="aktif" {{ $warga->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="pindah" {{ $warga->status == 'pindah' ? 'selected' : '' }}>Pindah</option>
+                                    <option value="tidak_aktif" {{ $warga->status == 'tidak_aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                                 </select>
                             </div>
                         </div>

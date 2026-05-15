@@ -14,7 +14,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                                 </svg>
                             </div>
-                            Profil Pengurus {{ $isAdmin ? 'RW' : 'RT' }}
+                            Profil Pengurus
                         </h2>
                         <p class="text-slate-500 mt-3 font-medium text-lg">Atur informasi pengurus untuk keperluan tanda tangan laporan dan sinkronisasi WhatsApp otomatis.</p>
                     </div>
@@ -45,9 +45,8 @@
                         <div class="md:col-span-1 flex flex-col items-center">
                             <div class="w-56 h-56 rounded-[2.5rem] border-8 border-slate-800 overflow-hidden bg-slate-900 shadow-2xl relative group mb-6">
                                 @php
-                                    $exists = $profil->foto && file_exists(public_path('uploads/profil/' . $profil->foto));
-                                    $photoUrl = $exists 
-                                        ? asset('uploads/profil/' . $profil->foto) . '?v=' . time() 
+                                    $photoUrl = $profil->foto 
+                                        ? route('storage.file', ['path' => $profil->foto]) . '?v=' . time()
                                         : 'https://ui-avatars.com/api/?name=' . urlencode($profil->nama_bendahara ?: auth()->user()->name) . '&background=4f46e5&color=fff&size=512';
                                 @endphp
                                 <img id="photo-preview" src="{{ $photoUrl }}" alt="Foto Bendahara" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -136,8 +135,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                    </form>
                 </div>
             </div>
         </div>

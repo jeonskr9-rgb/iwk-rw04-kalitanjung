@@ -42,8 +42,8 @@
                                 <select id="warga_id_a" name="warga_id" class="w-full select2-dark" required>
                                     <option value="" disabled selected>-- Cari Warga --</option>
                                     @foreach($wargas as $w)
-                                        <option value="{{ $w->id }}">
-                                            {{ $w->nama_warga }} | {{ $w->nik }} | RT {{ $w->rtUnit->nomor_rt ?? '-' }}
+                                        <option value="{{ $w->id }}" data-jenis="{{ $w->jenis_warga }}">
+                                            {{ $w->nama_warga }} | RT {{ $w->rtUnit->nomor_rt ?? '-' }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -51,8 +51,16 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between items-center mb-5">
-                                <x-input-label value="Pilih Bulan Pembayaran" class="text-slate-400 text-lg font-semibold" />
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-5 gap-4">
+                                <div class="flex items-center gap-4">
+                                    <x-input-label value="Pilih Bulan & Tahun" class="text-slate-400 text-lg font-semibold" />
+                                    <select id="tahun_a" name="tahun" class="bg-slate-800 text-white rounded-xl border border-slate-700 py-2 px-4 text-sm font-bold focus:ring-indigo-500 focus:border-indigo-500 transition shadow-inner">
+                                        @php $currentYear = date('Y'); @endphp
+                                        @for($y = $currentYear - 2; $y <= $currentYear + 5; $y++)
+                                            <option value="{{ $y }}" {{ $y == $currentYear ? 'selected' : '' }}>{{ $y }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
                                 <span id="status-loading" class="text-xs font-bold text-indigo-400 animate-pulse hidden uppercase tracking-widest">Mengecek Status...</span>
                             </div>
                             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4" id="month-container-a">
@@ -190,19 +198,37 @@
                 allowClear: true
             });
 
-            // Listener Form A
+            // Listeners Form A
             $('#kategori_id_a').on('change', calculateTotalA);
             $(document).on('click change', '.btn-bulan-a', calculateTotalA);
 
-            // AJAX Status Pengecekan Iuran
-            $('#warga_id_a').on('change', function() {
-                const wargaId = $(this).val();
+            // AJAX Status Pengecekan Iuran & Auto-detect Kategori
+            $('#warga_id_a, #tahun_a').on('change', function() {
+                const selectedWarga = $('#warga_id_a').find(':selected');
+                const wargaId = selectedWarga.val();
+                const jenisWarga = selectedWarga.data('jenis');
+                const selectedTahun = $('#tahun_a').val();
+
                 if (!wargaId) return resetMonthButtons();
+
+                // Auto-detect Kategori (IWK/Andon)
+                if (jenisWarga) {
+                    $('#kategori_id_a option').each(function() {
+                        const catName = $(this).text().toLowerCase();
+                        if (jenisWarga === 'Pribumi' && catName.includes('iwk')) {
+                            $(this).prop('selected', true);
+                            $('#kategori_id_a').trigger('change');
+                        } else if (jenisWarga === 'Pendatang' && catName.includes('andon')) {
+                            $(this).prop('selected', true);
+                            $('#kategori_id_a').trigger('change');
+                        }
+                    });
+                }
 
                 $('#status-loading').removeClass('hidden');
                 
                 $.ajax({
-                    url: `/iuran/check-status/${wargaId}`,
+                    url: `/iuran/check-status/${wargaId}?tahun=${selectedTahun}`,
                     method: 'GET',
                     success: function(response) {
                         $('#status-loading').addClass('hidden');
